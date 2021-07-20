@@ -10,9 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Client\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
