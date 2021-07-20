@@ -1,48 +1,50 @@
 ﻿USE [master]
-GO
 
-IF db_id('Ready') IS NOT NULL
-BEGIN
-  ALTER DATABASE [Ready] SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
-  DROP DATABASE [Ready]
-END
-GO
-
-CREATE DATABASE [Ready]
+IF db_id('Ready') IS NULL
+  CREATE DATABASE [Ready]
 GO
 
 USE [Ready]
 GO
 
----------------------------------------------------------------------------
 
+DROP TABLE IF EXISTS [UserProfile];
+DROP TABLE IF EXISTS [Questions];
+DROP TABLE IF EXISTS [Category];
 
+GO
 
 
 CREATE TABLE [UserProfile] (
-  [id] int PRIMARY KEY,
-  [fierbaseUserId] nvarchar(255),
-  [createDateTime] datetime,
-  [fname] nvarchar(255),
-  [lname] nvarchar(255),
-  [email] nvarchar(255),
-  [username] nvarchar(255),
-  [password] nvarchar(255)
+  [Id] int PRIMARY KEY,
+  [FirebaseUserId] varchar(255),
+  [CreateDateTime] datetime,
+  [FirstName] varchar(255),
+  [LastName] varchar(255),
+  [Email] varchar(255),
+  [UserName] varchar(255),
+  [IsDeleted] bit
 )
-GO
 
 CREATE TABLE [Questions] (
-  [id] int PRIMARY KEY,
-  [question_Number] int,
-  [my_Question] bit,
-  [userId] int,
-  [question] nvarchar(255),
-  [answer] nvarchar(255),
-  [learned] bit,
-  [isDeleted] bit,
-  [created] datetime
+  [Id] int PRIMARY KEY,
+  [CategoryId] int,
+  [UserProfileId] int,
+  [QuestionContent] varchar(255),
+  [AnswerContent] varchar(255),
+  [Learned] bit,
+  [IsDeleted] bit,
+  [CreateDateTime] datetime
 )
-GO
 
-ALTER TABLE [questions] ADD FOREIGN KEY ([userId]) REFERENCES [UserProfile] ([id])
+CREATE TABLE [Category] (
+  [Id] int PRIMARY KEY,
+  [Title] varchar(255),
+  [IsDeleted] bit
+
+
+CONSTRAINT [FK_Questions_UserProfile] FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id]),
+CONSTRAINT [FK_PostReaction_Reaction] FOREIGN KEY ([ReactionId]) REFERENCES [Reaction] ([Id])
+
+)
 GO
