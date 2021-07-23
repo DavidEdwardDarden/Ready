@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Ready.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ready.Repositories
 {
-    public class IQuestionRepository
+    public interface IQuestionRepository
     {
+        List<Question> GetAllQuestions();
     }
 }
