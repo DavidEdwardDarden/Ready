@@ -20,9 +20,7 @@ namespace Ready.Models
         [MaxLength(50)]
         public string LastName { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string UserName { get; set; }
+      
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -31,7 +29,6 @@ namespace Ready.Models
 
         public DateTime CreateDateTime { get; set; }
 
-        public bool IsDeleted { get; set; }
 
         public string FullName
         {
