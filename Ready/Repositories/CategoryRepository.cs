@@ -18,7 +18,7 @@ namespace Ready.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = "SELECT id, name FROM Category WHERE IsDeleted = 0  ORDER BY [Name]";
+                    cmd.CommandText = "SELECT id, name FROM Category ORDER BY [Name]";
                     var reader = cmd.ExecuteReader();
 
                     var categories = new List<Category>();

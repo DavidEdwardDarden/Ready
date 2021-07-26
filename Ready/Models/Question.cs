@@ -17,8 +17,6 @@ namespace Ready.Models
 
         public bool Learned { get; set; }
 
-        public bool IsDeleted { get; set; }
-
         public DateTime CreateDateTime { get; set; }
 
         public int CategoryId { get; set; }

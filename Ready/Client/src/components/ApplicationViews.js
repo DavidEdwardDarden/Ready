@@ -2,52 +2,28 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import Hello from "./Hello";
-
+import Home from "./Home";
+import "./Nav/sidebar.css";
+import SideBar from "./Nav/sidebar";
+import Quiz from "./Quiz/Quiz"
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
     <main>
       <Switch>
+
+        
         <Route path="/" exact>
-          {isLoggedIn ? <Hello /> : <Redirect to="/login" />}
+       
+          {isLoggedIn ? <Home /> : <Redirect to="/login" />}
+          {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
         </Route>
 
-        {/* <Route path="/posts/MyPosts" exact>
-          <MyPosts />
-        </Route>
-
-        <Route path="/posts" exact>
-          {isLoggedIn ? <PostList /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/posts/:id" exact>
-          {isLoggedIn ? <PostDetails /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/create" exact>
-          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/edit/:id" exact>
-          {isLoggedIn ? <PostForm /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/userprofile" exact>
-        {isLoggedIn ? <UserProfileList /> : <Redirect to="/login" />}
-        </Route>
-         
-        <Route path="/userprofile/:id" exact>
-        {isLoggedIn ? <UserCard /> : <Redirect to="/login" />}
-        </Route>
-
-        <Route path="/userprofile/edit/:id">
-          {isLoggedIn ? <UserProfileForm /> : <Redirect to="/login" />}
-        </Route>
-          
-        <Route path="/posts/tag/:id" exact>
-            {isLoggedIn ? <PostTagList /> : <Redirect to="/login" />}
-        </Route> */}
+        <Route exact path="/Quiz/:CategoryId(\d+)" >
+       
+       {isLoggedIn ? <Quiz /> : <Redirect to="/login" />}
+       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
+     </Route>
 
         <Route path="/login">
           <Login />
