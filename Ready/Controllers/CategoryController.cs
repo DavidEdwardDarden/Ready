@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Ready.Models;
 using Ready.Repositories;
 using System;
@@ -8,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Ready.Controllers
 {
+    //[Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
+
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryRepository _categoryRepository;

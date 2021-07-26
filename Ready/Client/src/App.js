@@ -1,10 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Spinner } from 'reactstrap';
-import Header from "./components/Header";
+// import Header from "./components/Nav/NavBar";
 import ApplicationViews from "./components/ApplicationViews";
 import { onLoginStatusChange } from "./modules/authManager";
 // import { UserProfileProvider } from './modules/postUserProfileManager';
+// import { ThemeProvider } from 'styled-components';
+// import { GlobalStyles } from './components/Nav/global';
+// import { theme } from './components/Nav/theme';
+
+
+
+// import { Burger } from './components/Nav/Burger/Burger'
 
 
 function App() {
@@ -19,14 +26,14 @@ function App() {
   }
 
   return (
+    <div>
+      
+     
     <Router>
-      {/* <UserProfileProvider> */}
-       
-          <Header isLoggedIn={isLoggedIn} />
           <ApplicationViews isLoggedIn={isLoggedIn} />
-       
-      {/* </UserProfileProvider> */}
     </Router>
+    
+   </div>
   );
 }
 

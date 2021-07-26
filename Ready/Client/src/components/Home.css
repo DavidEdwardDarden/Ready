@@ -1,0 +1,379 @@
+
+/* * {border:1px solid red} */
+
+.contain{
+  min-width:800px;
+  width: auto !important;
+  width:800px;
+}
+
+.centerme{
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    max-width: 22%;
+    max-height: 22%;
+    min-width: 8%;
+    min-height: 25%;
+    border: 10px solid rgb(0, 0, 0);
+}
+
+.centermequiz{
+  position: fixed;
+top: 10%;
+left: 50%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+  max-width: 14%;
+  max-height: 14%;
+  /* min-width: 8%;
+  min-height: 25%; */
+  border: 5px solid rgb(0, 0, 0);
+}
+
+.centermebuttonproceed1{
+  position: fixed;
+  top: 10%;
+  left: 40%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    /* max-width: 99%;
+    max-height: 99%; */
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.centermebuttonproceed2{
+  position: fixed;
+  top: 10%;
+  left: 60%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    /* max-width: 99%;
+    max-height: 99%; */
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.centerme3{
+    position: fixed;
+  top: 29%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+     max-width: 20%;
+    max-height: 20%;
+    min-width:5%;
+    min-height: 20%;
+}
+
+.centermequizcrown{
+  position: fixed;
+top: 53%;
+left: 50%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 100%;
+  max-height: 100%;
+  min-width:5%;
+  min-height: 20%;
+  opacity: 0.3;
+}
+
+.centerme7{
+  position: fixed;
+top: 50%;
+left: 50%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 150%;
+  max-height: 150%;
+  z-index: -1;
+  opacity: 0.05;
+}
+
+.centerme77{
+  position: fixed;
+top: 50%;
+left: 64%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 120%;
+  max-height: 120%;
+  z-index: -1;
+  opacity: 0.05;
+}
+
+.centerme777{
+  position: fixed;
+top: 50%;
+left: 20%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 140%;
+  max-height: 140%;
+  z-index: -1;
+  opacity: 0.05;
+}
+
+.centerme7777{
+  position: fixed;
+top: 18%;
+left: 10%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 190%;
+  max-height: 190%;
+  z-index: -1;
+  opacity: 0.16;
+}
+
+.centerme77777{
+  position: fixed;
+top: 80%;
+left: 40%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 190%;
+  max-height: 190%;
+  z-index: -1;
+  opacity: 0.075;
+}
+
+.centerme777777{
+  position: fixed;
+top: 100%;
+left: 6%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 190%;
+  max-height: 190%;
+  z-index: -1;
+  opacity: 0.03;
+}
+
+.centerme7777777{
+  position: fixed;
+top: 70%;
+left: -12%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 200%;
+  max-height: 200%;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.centermemore7{
+  position: fixed;
+top: 90%;
+left: -4%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 70%;
+  max-height: 70%;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.centermemore77{
+  position: fixed;
+top: 74%;
+left: 84%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 77%;
+  max-height: 77%;
+  z-index: -1;
+  opacity: 0.1;
+}
+
+.dollarsign1{
+  position: fixed;
+top: 74%;
+left: 24%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 50%;
+  max-height: 50%;
+  z-index: -1;
+  opacity: 0.07;
+}
+
+.dollarsign2{
+  position: fixed;
+top: 26%;
+left: 74%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 20%;
+  max-height: 20%;
+  z-index: -1;
+  opacity: 0.04;
+}
+
+.centerme8{
+  position: fixed;
+top: 50%;
+left: 75%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+   max-width: 92%;
+  max-height: 180%;
+
+}
+
+.small{
+    max-width: 3%;
+    max-height: 3%;
+}
+
+/* body {
+  background-image: url("pattern2.png");
+  background-color: #cccccc;
+ } */
+
+ /* body {
+  background: url(pattern1.png);
+} */
+
+body { 
+  background-image: url("./images/pattern2.png"); 
+  background-position: center center; 
+  background-size: 100% 100%; 
+} 
+
+.centermebutton{
+    position: fixed;
+  top: 82%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    /* max-width: 99%;
+    max-height: 99%; */
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.centermeexitbutton{
+  position: fixed;
+top: 90%;
+left: 50.5%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+  /* max-width: 99%;
+  max-height: 99%; */
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 3px;
+}
+
+.centermebutton4{
+  position: fixed;
+top: 71%;
+left: 50%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+  /* max-width: 99%;
+  max-height: 99%; */
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 3px;
+}
+
+.centermebutton5{
+  position: fixed;
+top: 67%;
+left: 50%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+  /* max-width: 99%;
+  max-height: 99%; */
+  /* border: 2px solid rgb(0, 0, 0);
+  border-radius: 3px; */
+}
+
+.orange{
+    background-color: orange;
+    min-width:1000px;
+    /* width: auto !important;
+    width:800px; */
+}
+
+html {background-color: orange;}
+
+
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: rgb(87, 82, 82);
+  color: whitesmoke;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  position: fixed;
+  top: 75%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    /* max-width: 99%;
+    max-height: 99%; */
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  position: fixed;
+  top: 88%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+    /* max-width: 99%;
+    max-height: 99%; */
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: rgb(61, 60, 60);
+}
+
+
+/* <div class="dropdown">
+  <button class="dropbtn">Dropdown</button>
+  <div class="dropdown-content">
+    <a href="#">Link 1</a>
+    <a href="#">Link 2</a>
+    <a href="#">Link 3</a>
+  </div>
+</div> */

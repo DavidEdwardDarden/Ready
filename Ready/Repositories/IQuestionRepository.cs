@@ -9,5 +9,7 @@ namespace Ready.Repositories
     public interface IQuestionRepository
     {
         List<Question> GetAllQuestions();
+
+        Question GetQuestionById(int id);
     }
 }
