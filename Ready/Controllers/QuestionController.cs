@@ -28,7 +28,20 @@ namespace Ready.Controllers
             return Ok(_QuestionRepository.GetAllQuestions());
         }
 
+        //----------------------------------------------------------------------
+        //GET A CATEGORY BY ID
+        [HttpGet("{CategoryId}")]
+        public IActionResult Get(int CategoryId)
+        {
+            var question = _QuestionRepository.GetAllQuestionsByCategoryId(CategoryId);
+            if (question == null)
+            {
+                return NotFound();
+            }
+            return Ok(question);
+        }
 
+        //----------------------------------------------------------------------
 
         //    // GET: QuestionController
         //    public ActionResult Index()

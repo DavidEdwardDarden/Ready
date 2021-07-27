@@ -48,7 +48,7 @@ namespace Ready.Repositories
             }
         }
 
-        public Question GetQuestionById(int id)
+        public List<Question> GetAllQuestionsByCategoryId(int CategoryId)
         {
             using (SqlConnection conn = Connection)
             {
@@ -59,15 +59,19 @@ namespace Ready.Repositories
                     cmd.CommandText = @"
                         SELECT Id, UserProfileId, QuestionContent, AnswerContent, Learned, CreateDateTime, CategoryId
                         FROM Questions
-                        WHERE Id = @id AND Learned = 0";
+                        WHERE CategoryId = @CategoryId AND Learned = 0";
 
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@CategoryId", CategoryId);
+
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    var questions = new List<Question>();
+
+
+                    while (reader.Read())
                     {
-                        Question question = new Question()
+                        questions.Add(new Question()
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
                             UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
@@ -75,15 +79,16 @@ namespace Ready.Repositories
                             AnswerContent = reader.GetString(reader.GetOrdinal("AnswerContent")),
                             CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
                             Learned = DbUtils.GetBoolean(reader, "Learned"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "PostCreateDateTime")
-                        };
+                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime")
+                        });
 
-                        reader.Close();
-                        return question;
+                      
                     }
 
                     reader.Close();
-                    return null;
+                    return questions;
+
+                  
                 }
             }
         }

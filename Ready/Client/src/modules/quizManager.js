@@ -7,9 +7,66 @@ import { getToken } from "./authManager";
 const _apiUrl = "/api/question";
 
 export const getAllQuestions = () => {
-    return fetch(`${_apiUrl}/`)
-    .then((res) => res.json())
-};
+    return getToken().then((token) => {
+     return fetch(`${_apiUrl}/`,{
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => {
+        if (resp.ok) {
+            console.log(resp,"oooooo")
+          return resp.json();
+          
+        } else {
+          throw new Error("An unknown error occurred while trying to get quotes.");
+        }
+      });
+    });
+  };
+
+  export const getAllQuestionsByCategoryId = (CategoryId) => {
+    return getToken().then((token) => {
+     return fetch(`${_apiUrl}/${CategoryId}`,{
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => {
+        if (resp.ok) {
+            console.log(resp,"testing GetAllQuestionsByCategoryId")
+          return resp.json();
+          
+        } else {
+          throw new Error("An unknown error occurred while trying to get quotes.");
+        }
+      });
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export const addCategory = (category) => {
 //     return getToken().then((token) => {
