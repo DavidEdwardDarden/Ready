@@ -10,6 +10,6 @@ namespace Ready.Repositories
     {
         List<Question> GetAllQuestions();
 
-        Question GetQuestionById(int id);
+        List<Question> GetAllQuestionsByCategoryId(int id);
     }
 }

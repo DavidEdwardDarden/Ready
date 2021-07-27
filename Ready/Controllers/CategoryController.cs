@@ -55,12 +55,12 @@ namespace Ready.Controllers
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            var tag = _categoryRepository.GetCategoryById(id);
-            if (tag == null)
+            var category = _categoryRepository.GetCategoryById(id);
+            if (category == null)
             {
                 return NotFound();
             }
-            return Ok(tag);
+            return Ok(category);
         }
 
         //----------------------------------------------------------------------
