@@ -18,7 +18,6 @@ const Quiz = () => {
   const getQList = () => {
     getAllQuestionsByCategoryId(CategoryId).then((results) => {
       setQuestionList(results);
-
     });
   };
 
@@ -34,18 +33,43 @@ const Quiz = () => {
     history.push(`/`);
   };
 
+
+  const setUpQL=()=>{
+    // let updatedQList = questionList.splice(x+1,1);
+    let updatedQList = [];
+
+    for(let i=0;i<questionList.length;i++){
+     if(i!== x){
+         updatedQList.push(questionList[i])
+     }
+     
+    }
+
+   setQuestionList(updatedQList);
+}
+
+
+
   //!  click ->  GOT IT BUTTON ---------------------------------------
   const handleClickEventGotIt = (e) => {
     e.preventDefault();
     setIsLoading(true);
 
-    //HERE I NEED TO CHANGED THE "LEARNED" VALUE
-    //OF THIS SPECIFIC QUESTION FROM "0" TO "1"
 
-    //    (HERE)
+setUpQL();
 
     //ask a new question
-    handleQuestionClickEvent(e);
+    if(x+2 <=  questionList.length){
+        updateQuestion2()
+        }
+        else{
+            setX(0)
+        }
+
+        if(questionList.length-1===0){
+            history.push(`/Victory`);
+         }
+
   };
 
 
@@ -55,15 +79,22 @@ const Quiz = () => {
     setShowAnswer(false)
   }
 
+  const updateQuestion2=() =>{
+      setX(x)
+    setShowAnswer(false)
+  }
+
 
 //!  click ->  NOT YET BUTTON ---------------------------------------
     const handleClickEventNotYet = (e) => {
 //ALREADY ON QUESTION 1 BEFORE YOU CLICK THE QUESTION
-let count=1;
-count= count + 1;
-if(count < questionList.count)
-updateQuestion()
 
+if(x+2 <=  questionList.length){
+updateQuestion()
+}
+else{
+    setX(0)
+}
   };
   
 
@@ -103,8 +134,8 @@ updateQuestion()
 
         <section onClick={handleQuestionClickEvent} className="questioncard">
         
-            <div> {!showAnswer &&<div>{questionList[x]?.questionContent}</div>} </div>
-            <div> {showAnswer &&<div>{questionList[x]?.answerContent}</div>} </div>
+            <div className="centermeqanda"> {!showAnswer &&<div>{questionList[x]?.questionContent}</div>} </div>
+            <div className="centermeqanda"> {showAnswer &&<div>{questionList[x]?.answerContent}</div>} </div>
 
         </section>
       </div>
