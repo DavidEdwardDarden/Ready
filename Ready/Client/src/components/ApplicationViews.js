@@ -6,6 +6,7 @@ import Home from "./Home";
 import "./Nav/sidebar.css";
 import SideBar from "./Nav/sidebar";
 import Quiz from "./Quiz/Quiz"
+import Victory from "./Quiz/Victory"
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -22,6 +23,12 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route exact path="/Quiz/:CategoryId(\d+)" >
        
        {isLoggedIn ? <Quiz /> : <Redirect to="/login" />}
+       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
+     </Route>
+
+     <Route exact path="/Victory" >
+       
+       {isLoggedIn ? <Victory /> : <Redirect to="/login" />}
        {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
      </Route>
 

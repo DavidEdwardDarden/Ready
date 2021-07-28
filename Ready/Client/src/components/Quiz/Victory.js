@@ -11,7 +11,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { getAllQuestionsByCategoryId } from "../../modules/quizManager";
 
 
-const Quiz = () => {
+const Victory = () => {
   const { CategoryId } = useParams();
   const [questionList, setQuestionList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -42,7 +42,7 @@ const Quiz = () => {
 
         <section  className="questioncard">
         
-            <div> YOU ARE A WINNER! </div>
+            <div className="centermeqanda"> YOU ARE A VICTORIOUS! </div>
            
 
         </section>
@@ -51,4 +51,4 @@ const Quiz = () => {
   );
 };
 
-export default Quiz;
+export default Victory;
