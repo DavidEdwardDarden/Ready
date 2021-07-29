@@ -7,6 +7,7 @@ import "./Nav/sidebar.css";
 import SideBar from "./Nav/sidebar";
 import Quiz from "./Quiz/Quiz"
 import Victory from "./Quiz/Victory"
+import MyQuestions from "./MyQuestions/MyQuestions"
 
 export default function ApplicationViews({ isLoggedIn }) {
   console.log(isLoggedIn)
@@ -16,7 +17,6 @@ export default function ApplicationViews({ isLoggedIn }) {
 
         
         <Route path="/" exact>
-       
           {isLoggedIn ? <Home /> : <Redirect to="/login" />}
           {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
         </Route>
@@ -27,8 +27,12 @@ export default function ApplicationViews({ isLoggedIn }) {
      </Route>
 
      <Route exact path="/Victory" >
-       
        {isLoggedIn ? <Victory /> : <Redirect to="/login" />}
+       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
+     </Route>
+
+     <Route exact path="/myquestions" >
+       {isLoggedIn ? <MyQuestions /> : <Redirect to="/login" />}
        {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
      </Route>
 

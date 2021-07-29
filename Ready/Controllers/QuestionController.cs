@@ -36,7 +36,7 @@ namespace Ready.Controllers
         //GET ALL QUESTIONS BY USER ID AND CATEGORY ID
         // GET: QuestionController
         [HttpGet("Quiz/{CategoryId}/{FirebaseUserId}")]
-        public IActionResult GetbyUserProfileIdandCategoryId(int CategoryId, string FirebaseUserId)
+        public IActionResult GetAllQuestionsByFirebaseUserIdandCategoryId(int CategoryId, string FirebaseUserId)
         {
            var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId, FirebaseUserId));
             if (questions == null)
