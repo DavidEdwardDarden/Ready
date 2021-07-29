@@ -25,6 +25,31 @@ export const getAllQuestions = () => {
     });
   };
 
+
+
+
+  export const GetAllQuestionsByFirebaseUserIdandCategoryId = (CategoryId, FirebaseUserProfileId) => {
+    return getToken().then((token) => {
+     return fetch(`${_apiUrl}/Quiz/${CategoryId}/${FirebaseUserProfileId}`,{
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => {
+        if (resp.ok) {
+            console.log(resp,"testing GetAllQuestionsByFirebaseUserIdandCategoryId")
+          return resp.json();
+          
+        } else {
+          throw new Error("An unknown error occurred while trying to get quotes.");
+        }
+      });
+    });
+  };
+
+
+
+
   export const getAllQuestionsByCategoryId = (CategoryId) => {
     return getToken().then((token) => {
      return fetch(`${_apiUrl}/${CategoryId}`,{

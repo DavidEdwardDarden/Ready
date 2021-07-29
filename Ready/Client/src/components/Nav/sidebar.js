@@ -1,8 +1,17 @@
 /* eslint-disable import/no-anonymous-default-export */
 import React from "react";
 import { slide as Menu } from "react-burger-menu";
+import firebase from "firebase/app";
+import "firebase/auth";
 
 export default props => {
+
+
+const shutdoor = ()=>{
+  firebase.auth().signOut()
+}
+
+
   return (
     // Pass on our props
     <Menu {...props}>
@@ -10,7 +19,7 @@ export default props => {
         HOME
       </a>
 
-      <a className="menu-item" href="/myquestions">
+      <a className="menu-item" href="/myquestions" >
         MY QUESTIONS
       </a>
 
@@ -18,7 +27,7 @@ export default props => {
         ADD QUESTIONS
       </a>
 
-      <a className="menu-item" href="/login">
+      <a className="menu-item" href="/login" onClick={shutdoor}>
         LOGOUT
       </a>
 

@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Ready.Models;
 using Ready.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Ready.Controllers
@@ -14,10 +16,12 @@ namespace Ready.Controllers
     public class QuestionController : ControllerBase
     {
         private readonly IQuestionRepository _QuestionRepository;
-        public QuestionController(IQuestionRepository QuestionRepository)
+        private readonly IUserProfileRepository _UserProfileRepository;
+        public QuestionController(IQuestionRepository QuestionRepository, IUserProfileRepository UserProfileRepository)
         {
             _QuestionRepository = QuestionRepository;
-        }
+            _UserProfileRepository = UserProfileRepository;
+    }
 
         //-----------------------------------------------------------------------
         //GET ALL QUESTIONS
@@ -28,18 +32,41 @@ namespace Ready.Controllers
             return Ok(_QuestionRepository.GetAllQuestions());
         }
 
-        //----------------------------------------------------------------------
-        //GET A CATEGORY BY ID
-        [HttpGet("{CategoryId}")]
-        public IActionResult Get(int CategoryId)
+        //-----------------------------------------------------------------------
+        //GET ALL QUESTIONS BY USER ID AND CATEGORY ID
+        // GET: QuestionController
+        [HttpGet("Quiz/{CategoryId}/{FirebaseUserId}")]
+        public IActionResult GetbyUserProfileIdandCategoryId(int CategoryId, string FirebaseUserId)
         {
-            var question = _QuestionRepository.GetAllQuestionsByCategoryId(CategoryId);
-            if (question == null)
+           var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId, FirebaseUserId));
+            if (questions == null)
             {
                 return NotFound();
             }
-            return Ok(question);
+            return Ok(questions);
         }
+
+        //---------------------------------------------------------------------
+        //GET CURRENT USER PROFILE
+        private UserProfile GetCurrentUserProfile()
+        {
+            var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return _UserProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        }
+   
+
+        //----------------------------------------------------------------------
+        //GET A CATEGORY BY ID
+        //[HttpGet("{CategoryId}")]
+        //public IActionResult Get(int CategoryId)
+        //{
+        //    var question = _QuestionRepository.GetAllQuestionsByCategoryId(CategoryId);
+        //    if (question == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(question);
+        //}
 
         //----------------------------------------------------------------------
 
