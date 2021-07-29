@@ -6,20 +6,27 @@ import thing2 from "./images/crown.png";
 import thing3 from "./images/pattern2.png";
 import thing4 from "./images/process3.png";
 import thing88 from "./images/process2.png";
-// import dollarsign from "./images/dollarsign.png";
 import "./Home.css";
-import useDropdownMenu from "react-accessible-dropdown-menu-hook";
 import { useHistory } from 'react-router-dom';
 import { getAllCategories } from '../modules/categoryManager';
+import "firebase/auth";
+import firebase from "firebase/app"
+
 
 const Home = () => {
   const [category, setCategory] = useState("");
   const [ categoryList, setCategoryList ] = useState([]);
   const [ isLoading, setIsLoading ] = useState(false);
+  const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
 
   
   const history = useHistory()
   
+// const fetchFirebaseUserProfileId = () => {
+  
+//   return firebase.auth().currentUser.uid
+// }
+
 
 
 //fetch list of all categories for dropdown
@@ -28,6 +35,7 @@ useEffect(() => {
     .then(res => {
       setCategoryList(res)
     })
+    setFirebaseUserProfileId(firebase.auth().currentUser.uid)
 }, [])
 
 // const handleControlledInputChange = (e) => {
@@ -68,8 +76,19 @@ const handleClickEvent = (e) => {
   if (category === '') {
     alert("Please select a category")
   } else {
-     history.push(`/Quiz/${category}`);
-  }
+    //SET FIREBASE USER ID HERE
+    // let newFBUID = { ...firebaseUserProfileId };
+
+    // newFBUID.firebaseUserProfileId = firebaseUserProfileId;
+
+
+    
+      setFirebaseUserProfileId(firebase.auth().currentUser.uid)
+   
+
+
+     history.push(`/Quiz/${category}/${FirebaseUserProfileId}`);
+  } 
 }
 
 

@@ -11,5 +11,7 @@ namespace Ready.Repositories
         List<Question> GetAllQuestions();
 
         List<Question> GetAllQuestionsByCategoryId(int id);
+
+        List<Question> GetAllQuestionsByFirebaseUserIdandCategoryId(int CategoryId, string FirebaseUserId);
     }
 }

@@ -9,6 +9,7 @@ import Quiz from "./Quiz/Quiz"
 import Victory from "./Quiz/Victory"
 
 export default function ApplicationViews({ isLoggedIn }) {
+  console.log(isLoggedIn)
   return (
     <main>
       <Switch>
@@ -20,8 +21,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
         </Route>
 
-        <Route exact path="/Quiz/:CategoryId(\d+)" >
-       
+        <Route exact path="/Quiz/:CategoryId(\d+)/:FirebaseUserProfileId" > 
        {isLoggedIn ? <Quiz /> : <Redirect to="/login" />}
        {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
      </Route>
