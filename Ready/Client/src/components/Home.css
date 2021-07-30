@@ -94,6 +94,14 @@ transform: translate(-50%, -50%);
   opacity: 0.05;
 }
 
+.centermyquestions{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  /* margin-left: auto;
+  margin-right: auto; */
+}
+
 .centermeqanda{
   position: fixed;
 top: 47%;
