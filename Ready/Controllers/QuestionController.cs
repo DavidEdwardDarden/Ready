@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+
 namespace Ready.Controllers
 {
     //[Authorize]
@@ -35,15 +36,33 @@ namespace Ready.Controllers
         //-----------------------------------------------------------------------
         //GET ALL QUESTIONS BY USER ID AND CATEGORY ID
         // GET: QuestionController
-        [HttpGet("Quiz/{CategoryId}/{FirebaseUserId}")]
-        public IActionResult GetAllQuestionsByFirebaseUserIdandCategoryId(int CategoryId, string FirebaseUserId)
+        [HttpGet("Quiz/{CategoryId}")]
+        public IActionResult GetAllQuestionsByFirebaseUserIdandCategoryId(int CategoryId)
         {
-           var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId, FirebaseUserId));
-            if (questions == null)
+            //var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId, FirebaseUserId));
+            // if (questions == null)
+            // {
+            //     return NotFound();
+            // }
+            // return Ok(questions);
+
+
+
+            var user = GetCurrentUserProfile();
+             if (user == null)
             {
-                return NotFound();
+                return Unauthorized();
             }
-            return Ok(questions);
+            else
+            {
+                var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId, user.FirebaseUserId));
+                if (questions == null)
+                {
+                    return NotFound();
+                }
+                return Ok(questions);
+            }
+
         }
 
         //-----------------------------------------------------------------------
@@ -61,17 +80,56 @@ namespace Ready.Controllers
             return Ok(questions);
         }
 
+        //---------------------------------------------------------------------
+        //GET CURRENT USER'S QUESTIONS
+    //    [HttpGet("GetAllUserQuestions")]
+
+    //public IActionResult GetAllUserQuestions()
+    //{
+    //        var user = GetCurrentUserProfile();
+    //         if (user == null)
+    //    {
+    //        return Unauthorized();
+    //    }
+    //    else
+    //    {
+    //        var questions = _QuestionRepository.GetAllUserQuestions(user.FirebaseUserId);
+    //        return Ok();
+    //    }
+    //}
 
 
 
-            //---------------------------------------------------------------------
-            //GET CURRENT USER PROFILE
-            private UserProfile GetCurrentUserProfile()
+
+        //---------------------------------------------------------------------
+        //GET CURRENT USER PROFILE
+        //    private UserProfile GetCurrentUserProfile()
+        //{
+        //    var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+        //    return _UserProfileRepository.GetByFirebaseUserId(firebaseUserId);
+        //}
+
+
+        //--------------------f------------------------------------------------------
+        //GET CURRENT USER PROFILE
+        private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            return _UserProfileRepository.GetByFirebaseUserId(firebaseUserId);
+
+
+            if (firebaseUserId != null)
+            {
+                return _UserProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            }
+            else
+            {
+                return null;
+            }
+
+
+
         }
-   
+
 
         //----------------------------------------------------------------------
         //GET A CATEGORY BY ID
