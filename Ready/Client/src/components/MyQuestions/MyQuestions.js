@@ -9,15 +9,42 @@ import "../Home.css";
 // import useDropdownMenu from "react-accessible-dropdown-menu-hook";
 import { useHistory, useParams } from "react-router-dom";
 import { getAllQuestionsByCategoryId } from "../../modules/quizManager";
-
+import { GetAllQuestionsByFirebaseUserId } from "../../modules/quizManager";
+import "firebase/auth";
+import firebase from "firebase/app";
 
 const MyQuestions = () => {
-  const { CategoryId } = useParams();
+  //   const { CategoryId } = useParams();
   const [questionList, setQuestionList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showAnswer, setShowAnswer] = useState(false);
-  let [x, setX] = useState(0);
   const history = useHistory();
+  //   const [FirebaseUserId, setFirebaseUserId] = useState("");
+
+  //!  QUESTION ARRAY  ---------------------------------------
+  // useEffect(() => {
+
+  //       setFirebaseUserId(firebase.auth().currentUser.uid)
+
+  //   }, [])
+
+  const getQList = () => {
+    // setIsLoading(true);
+    // setFirebaseUserId(firebase.auth().currentUser.uid)
+
+    GetAllQuestionsByFirebaseUserId(firebase.auth().currentUser.uid).then(
+      (results) => {
+        setQuestionList(results);
+      }
+    );
+  };
+
+  //!  SET STATE  ---------------------------------------
+  useEffect(() => {
+    //   setFirebaseUserId(firebase.auth().currentUser.uid)
+    getQList();
+
+    //   setIsLoading(true);
+  }, []);
 
   //!  click ->  EXIT BUTTON ---------------------------------------
   const handleClickEvent = (e) => {
@@ -25,6 +52,14 @@ const MyQuestions = () => {
     setIsLoading(true);
     history.push(`/`);
   };
+
+  //!  SET STATE  ---------------------------------------
+  useEffect(() => {
+    //   setFirebaseUserId(firebase.auth().currentUser.uid)
+    getQList();
+
+    //   setIsLoading(true);
+  }, []);
 
   //!  WELCOME TO THE DOM!  ---------------------------------------
   return (
@@ -34,18 +69,26 @@ const MyQuestions = () => {
         <img src={thing} className="centermequiz" alt="user img" />
         <img src={thing3} className="centerme7" alt="user img3" />
 
+        <div className="centermeqanda"> YOUR QUESTIONS: </div>
+
+        {questionList.map((question) => (
+          <div>
+            <section key={question.id}>
+              <div className="centermyquestions">
+                {" "}
+                <div>{question?.questionContent}</div>{" "}
+              </div>
+            </section>
+
+            <button onClick={handleClickEvent} className="centermyquestions">
+              Delete
+            </button>
+          </div>
+        ))}
+
         <button onClick={handleClickEvent} className="centermeexitbutton">
           Exit
         </button>
-
-    
-
-        <section  className="questioncard">
-        
-            <div className="centermeqanda"> YOUR QUESTIONS: </div>
-           
-
-        </section>
       </div>
     </>
   );

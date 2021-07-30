@@ -46,9 +46,27 @@ namespace Ready.Controllers
             return Ok(questions);
         }
 
-        //---------------------------------------------------------------------
-        //GET CURRENT USER PROFILE
-        private UserProfile GetCurrentUserProfile()
+        //-----------------------------------------------------------------------
+        //GET ALL QUESTIONS BY FIREBASE USER ID
+        // GET: QuestionController
+
+        [HttpGet("MyQuestionsList/{FirebaseUserId}")]
+        public IActionResult GetAllQuestionsByFirebaseUserId(string FirebaseUserId)
+        {
+            var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserId(FirebaseUserId));
+            if (questions == null)
+            {
+                return NotFound();
+            }
+            return Ok(questions);
+        }
+
+
+
+
+            //---------------------------------------------------------------------
+            //GET CURRENT USER PROFILE
+            private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             return _UserProfileRepository.GetByFirebaseUserId(firebaseUserId);

@@ -47,7 +47,25 @@ export const getAllQuestions = () => {
     });
   };
 
-
+  export const GetAllQuestionsByFirebaseUserId = (FirebaseUserId) => {
+    return getToken().then((token) => {
+        console.log(FirebaseUserId)
+     return fetch(`${_apiUrl}/MyQuestionsList/${FirebaseUserId}`,{
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }).then(resp => {
+        if (resp.ok) {
+            console.log(resp,"testing GetAllQuestionsByFirebaseUserId")
+          return resp.json();
+          
+        } else {
+          throw new Error("An unknown error occurred while trying to get My Questions.");
+        }
+      });
+    });
+  };
 
 
   export const getAllQuestionsByCategoryId = (CategoryId) => {
