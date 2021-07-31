@@ -1,36 +1,22 @@
 import { React, useEffect, useState } from "react";
-// import { getSubscribedPosts } from "../modules/subscriptManager.js";
-// import  Post from "./posts/PostListCard.js"
-// import thing from "./images/ReadyLogo.jpg";
 import thing from "../images/ReadyLogo.jpg";
 import thing2 from "../images/crown.png";
 import thing3 from "../images/pattern2.png";
 import "../Home.css";
-// import useDropdownMenu from "react-accessible-dropdown-menu-hook";
-import { useHistory, useParams } from "react-router-dom";
-import { getAllQuestionsByCategoryId } from "../../modules/quizManager";
-import { GetAllQuestionsByFirebaseUserId } from "../../modules/quizManager";
+import { useHistory } from "react-router-dom";
+import {GetAllQuestionsByFirebaseUserId} from "../../modules/quizManager";
 import "firebase/auth";
 import firebase from "firebase/app";
+import { Question } from "./MyQuestionCard";
+import { deleteQuestion} from "../../modules/quizManager";
 
 const MyQuestions = () => {
-  //   const { CategoryId } = useParams();
   const [questionList, setQuestionList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [ setIsLoading] = useState(false);
   const history = useHistory();
-  //   const [FirebaseUserId, setFirebaseUserId] = useState("");
 
   //!  QUESTION ARRAY  ---------------------------------------
-  // useEffect(() => {
-
-  //       setFirebaseUserId(firebase.auth().currentUser.uid)
-
-  //   }, [])
-
   const getQList = () => {
-    // setIsLoading(true);
-    // setFirebaseUserId(firebase.auth().currentUser.uid)
-
     GetAllQuestionsByFirebaseUserId(firebase.auth().currentUser.uid).then(
       (results) => {
         setQuestionList(results);
@@ -53,6 +39,17 @@ const MyQuestions = () => {
     history.push(`/`);
   };
 
+    //!  click ->  DELETE BUTTON ---------------------------------------
+    const handledeletequestion = ( Id) => {
+        // evt.preventDefault() 
+        var result = window.confirm(`Are you sure you want to delete this question?`);
+        if (result) {
+            // console.log(result)
+            deleteQuestion(Id).then(getQList)
+            
+        }
+    }
+
   //!  SET STATE  ---------------------------------------
   useEffect(() => {
     //   setFirebaseUserId(firebase.auth().currentUser.uid)
@@ -73,20 +70,20 @@ const MyQuestions = () => {
 
         {questionList.map((question) => (
           <div>
-            <section key={question.id}>
+            {/* <section key={question.id * Math.random() + Math.random}>
               <div className="centermyquestions">
                 {" "}
                 <div>{question?.questionContent}</div>{" "}
               </div>
-            </section>
+            </section> */}
 
-            <button onClick={handleClickEvent} className="centermyquestions">
-              Delete
-            </button>
+            <Question question={question} deletefunction={handledeletequestion} key={question.id * Math.random()} />
           </div>
         ))}
 
-        <button onClick={handleClickEvent} className="centermeexitbutton">
+
+
+        <button onClick={handleClickEvent} className="centermeexitbuttonx">
           Exit
         </button>
       </div>

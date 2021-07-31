@@ -15,5 +15,13 @@ namespace Ready.Repositories
         List<Question> GetAllQuestionsByFirebaseUserIdandCategoryId(int CategoryId, string FirebaseUserId);
 
         List<Question> GetAllQuestionsByFirebaseUserId(string FirebaseUserId);
+
+        public void DeleteQuestionById(int Id);
+
+        public void EditQuestion(Question question);
+
+        public Question GetQuestionById(int Id);
+
+        public void AddQuestion(Question question);
     }
 }

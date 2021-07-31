@@ -8,9 +8,11 @@ import SideBar from "./Nav/sidebar";
 import Quiz from "./Quiz/Quiz"
 import Victory from "./Quiz/Victory"
 import MyQuestions from "./MyQuestions/MyQuestions"
+import EditQuestion from "./EditQuestion/EditQuestion"
+import AddQuestions from "./AddQuestions/AddQuestions"
 
 export default function ApplicationViews({ isLoggedIn }) {
-  console.log(isLoggedIn)
+  // console.log(isLoggedIn)
   return (
     <main>
       <Switch>
@@ -33,6 +35,17 @@ export default function ApplicationViews({ isLoggedIn }) {
 
      <Route exact path="/myquestions" >
        {isLoggedIn ? <MyQuestions /> : <Redirect to="/login" />}
+       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
+     </Route>
+
+     <Route exact path="/addquestions" >
+       {isLoggedIn ? <AddQuestions /> : <Redirect to="/login" />}
+       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
+     </Route>
+
+     {/* `/question/edit/${question.id}` */}
+     <Route exact path="/question/edit/:Id(\d+)" >
+       {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
        {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
      </Route>
 

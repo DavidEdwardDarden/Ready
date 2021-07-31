@@ -1,6 +1,3 @@
-import React,  { createContext, useContext, useState } from "react"
-import { UserProfileContext } from "./postUserProfileManager"
-import firebase from "firebase/app";
 import "firebase/auth";
 import { getToken } from "./authManager";
 
@@ -15,7 +12,7 @@ export const getAllQuestions = () => {
         }
       }).then(resp => {
         if (resp.ok) {
-            console.log(resp,"oooooo")
+            // console.log(resp,"oooooo")
           return resp.json();
           
         } else {
@@ -27,10 +24,10 @@ export const getAllQuestions = () => {
 
 
 
-
-  export const GetAllQuestionsByFirebaseUserIdandCategoryId = (CategoryId, FirebaseUserProfileId) => {
+//FirebaseUserId Is supplied in the backend
+  export const GetAllQuestionsByFirebaseUserIdandCategoryId = (CategoryId) => {
     return getToken().then((token) => {
-     return fetch(`${_apiUrl}/Quiz/${CategoryId}/${FirebaseUserProfileId}`,{
+     return fetch(`${_apiUrl}/Quiz/${CategoryId}`,{
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
@@ -41,23 +38,23 @@ export const getAllQuestions = () => {
           return resp.json();
           
         } else {
-          throw new Error("An unknown error occurred while trying to get quotes.");
+          throw new Error("An unknown error occurred while trying to get questions by firebase User Id and Category Id.");
         }
       });
     });
   };
 
-  export const GetAllQuestionsByFirebaseUserId = (FirebaseUserId) => {
+  export const GetAllQuestionsByFirebaseUserId = () => {
     return getToken().then((token) => {
-        console.log(FirebaseUserId)
-     return fetch(`${_apiUrl}/MyQuestionsList/${FirebaseUserId}`,{
+      //Firebase UserId is supplied by the back end API
+     return fetch(`${_apiUrl}/MyQuestionsList`,{
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`
         }
       }).then(resp => {
         if (resp.ok) {
-            console.log(resp,"testing GetAllQuestionsByFirebaseUserId")
+            // console.log(resp,"testing GetAllQuestionsByFirebaseUserId")
           return resp.json();
           
         } else {
@@ -87,6 +84,36 @@ export const getAllQuestions = () => {
     });
   };
 
+  export const deleteQuestion = (Id) => {
+    return getToken().then((token) => {
+        return fetch(`${_apiUrl}/${Id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            
+        })
+    });
+};
+
+export const getQuestionById = (Id) => {
+    return getToken().then((token) => {
+        return fetch(`${_apiUrl}/${Id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        }).then(res => {
+            // console.log(res)
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("An unknown error occurred while trying to get the comment.");
+            }
+        });
+    });
+};
 
 
 
