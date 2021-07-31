@@ -1,5 +1,5 @@
 
-/* * {border:1px solid red} */
+ /* * {border:1px solid red}  */
 
 .contain{
   min-width:800px;
@@ -100,6 +100,94 @@ transform: translate(-50%, -50%);
   justify-content: center;
   /* margin-left: auto;
   margin-right: auto; */
+  /* transform: translate(0%, 2000%); */
+  font-weight: bold;
+  /* position: fixed; */
+  /* top: 53%;
+  left: 50%; */
+  /* bring your own prefixes */
+  transform: translate(9%, 900%);
+     /* max-width: 100%;
+    max-height: 100%;
+    min-width:5%;
+    min-height: 20%; */
+    /* opacity: 0.3; */
+    font-size: 130%;
+}
+
+.QuestionList{
+  /* display: flex;
+  flex-wrap: nowrap;
+  justify-content: center; */
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* transform: translate(0%, 2000%); */
+  /* font-weight: bold; */
+  /* position: fixed; */
+  /* top: 53%;
+  left: 50%; */
+  /* bring your own prefixes */
+  /* transform: translate(-2%, 1480%); */
+     /* max-width: 100%;
+    max-height: 100%;
+    min-width:5%;
+    min-height: 20%; */
+    /* opacity: 0.3; */
+    font-size: 130%;
+}
+
+.centermyquestionsD{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* transform: translate(0%, 2000%); */
+  font-weight: bold;
+  /* position: fixed; */
+  /* top: 53%;
+  left: 50%; */
+  /* bring your own prefixes */
+  transform: translate(9%, 0%);
+     /* max-width: 100%;
+    max-height: 100%;
+    min-width:5%;
+    min-height: 20%; */
+    /* opacity: 0.3; */
+    font-size: 130%;
+}
+
+.centermyquestionsE{
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* transform: translate(0%, 2000%); */
+  font-weight: bold;
+  /* position: fixed; */
+  /* top: 53%;
+  left: 50%; */
+  /* bring your own prefixes */
+  transform: translate(9%, 0%);
+     /* max-width: 100%;
+    max-height: 100%;
+    min-width:5%;
+    min-height: 20%; */
+    /* opacity: 0.3; */
+    font-size: 130%;
+
+}
+
+.centermyquestionsbutton2{
+  /* display: flex;
+  flex-wrap: nowrap;
+  justify-content: center; */
+  /* margin-left: auto;
+  margin-right: auto; */
+  /* float: right; */
+  /* position: fixed;
+  transform: translate(2400%, 1465%); */
 }
 
 .centermeqanda{
@@ -280,6 +368,18 @@ body {
     border-radius: 3px;
 }
 
+.centermeexitbuttonx{
+  position: fixed;
+top: 20%;
+left: 50%;
+/* bring your own prefixes */
+transform: translate(-50%, -50%);
+  /* max-width: 99%;
+  max-height: 99%; */
+  border: 2px solid rgb(0, 0, 0);
+  border-radius: 3px;
+}
+
 .centermeexitbutton{
   position: fixed;
 top: 90%;
@@ -421,4 +521,11 @@ html {background-color: orange;}
     min-width:30%;
     min-height: 20%;
     /* opacity: 0.9; */
+}
+
+.buffer{
+  /* margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px; */
 }

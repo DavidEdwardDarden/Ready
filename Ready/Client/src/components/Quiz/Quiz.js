@@ -7,22 +7,19 @@ import { useHistory, useParams } from "react-router-dom";
 import { GetAllQuestionsByFirebaseUserIdandCategoryId } from "../../modules/quizManager";
 
 const Quiz = () => {
-  const { CategoryId, FirebaseUserProfileId } = useParams();
+  const { CategoryId } = useParams();
   const [questionList, setQuestionList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [ IsLoading,setIsLoading] = useState(false);
   const [showAnswer, setShowAnswer] = useState(false);
   let [x, setX] = useState(0);
   const history = useHistory();
 
   //!  QUESTION ARRAY  ---------------------------------------
   const getQList = () => {
-    GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId, FirebaseUserProfileId).then((results) => {
+    GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId).then((results) => {
       setQuestionList(results);
     });
   };
-
-
-
 
   //!  SET STATE  ---------------------------------------
   useEffect(() => {

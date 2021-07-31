@@ -1,6 +1,5 @@
 import React,  { createContext, useContext, useState } from "react"
-import { UserProfileContext } from "./postUserProfileManager"
-import firebase from "firebase/app";
+import { UserProfileContext } from "./UserProfileManager"
 import "firebase/auth";
 import { getToken } from "./authManager";
 

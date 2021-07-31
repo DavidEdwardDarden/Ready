@@ -16,7 +16,7 @@ import firebase from "firebase/app"
 const Home = () => {
   const [category, setCategory] = useState("");
   const [ categoryList, setCategoryList ] = useState([]);
-  const [ isLoading, setIsLoading ] = useState(false);
+  const [ IsLoading, setIsLoading ] = useState(false);
   const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
 
   

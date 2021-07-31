@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ready.Controllers
 {
+    //SET [Authorize] for every INDIVIDUAL thing EXCEPT where you use the helper function AND Login stuff
     //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
@@ -34,20 +35,12 @@ namespace Ready.Controllers
         }
 
         //-----------------------------------------------------------------------
-        //GET ALL QUESTIONS BY USER ID AND CATEGORY ID
+        //GET ALL QUESTIONS BY FIREBASE USER ID AND CATEGORY ID
         // GET: QuestionController
         [HttpGet("Quiz/{CategoryId}")]
         public IActionResult GetAllQuestionsByFirebaseUserIdandCategoryId(int CategoryId)
         {
-            //var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserIdandCategoryId(CategoryId, FirebaseUserId));
-            // if (questions == null)
-            // {
-            //     return NotFound();
-            // }
-            // return Ok(questions);
-
-
-
+            //JUST NEED THE CATEGORY ID INITIALLY... THE HELPER FUNCTION ON THIS PAGE SUPPLIES THE FIREBASEUSERID
             var user = GetCurrentUserProfile();
              if (user == null)
             {
@@ -69,49 +62,84 @@ namespace Ready.Controllers
         //GET ALL QUESTIONS BY FIREBASE USER ID
         // GET: QuestionController
 
-        [HttpGet("MyQuestionsList/{FirebaseUserId}")]
-        public IActionResult GetAllQuestionsByFirebaseUserId(string FirebaseUserId)
+        [HttpGet("MyQuestionsList")]
+        public IActionResult GetAllQuestionsByFirebaseUserId()
         {
-            var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserId(FirebaseUserId));
-            if (questions == null)
+
+            var user = GetCurrentUserProfile();
+            if (user == null)
             {
-                return NotFound();
+                return Unauthorized();
             }
-            return Ok(questions);
+            else
+            {
+                var questions = (_QuestionRepository.GetAllQuestionsByFirebaseUserId(user.FirebaseUserId));
+                if (questions == null)
+                {
+                    return NotFound();
+                }
+                return Ok(questions);
+            }
         }
 
         //---------------------------------------------------------------------
-        //GET CURRENT USER'S QUESTIONS
-    //    [HttpGet("GetAllUserQuestions")]
-
-    //public IActionResult GetAllUserQuestions()
-    //{
-    //        var user = GetCurrentUserProfile();
-    //         if (user == null)
-    //    {
-    //        return Unauthorized();
-    //    }
-    //    else
-    //    {
-    //        var questions = _QuestionRepository.GetAllUserQuestions(user.FirebaseUserId);
-    //        return Ok();
-    //    }
-    //}
+        //DELETE
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _QuestionRepository.DeleteQuestionById(id);
+            return NoContent();
+        }
 
 
+        //----------------------------------------------------------------------
+        //EDIT Question
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Question question)
+        {
+            if (id != question.Id)
+            {
+                return BadRequest();
+            }
+
+            _QuestionRepository.EditQuestion(question);
+            return Ok(question);
+        }
+
+        //---------------------------------------------------------------------
+        //GET Question by Id
+        [HttpGet("{Id}")]
+        public IActionResult Get(int Id)
+        {
+            var tag = _QuestionRepository.GetQuestionById(Id);
+            if (tag == null)
+            {
+                return NotFound();
+            }
+            return Ok(tag);
+        }
 
 
         //---------------------------------------------------------------------
-        //GET CURRENT USER PROFILE
-        //    private UserProfile GetCurrentUserProfile()
-        //{
-        //    var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-        //    return _UserProfileRepository.GetByFirebaseUserId(firebaseUserId);
-        //}
+        //ADD Question
+        [HttpPost]
+        public IActionResult AddQuestion(Question question)
+        {
 
+          
+            DateTime dateCreated = DateTime.Now;
+            question.Learned = false;
+
+            _QuestionRepository.AddQuestion(question);
+            return CreatedAtAction("Get", new { id = question.Id }, question);
+
+
+        }
 
         //--------------------f------------------------------------------------------
-        //GET CURRENT USER PROFILE
+        //HELPER FUNCTION!!!!!!!!!!     GET CURRENT USER PROFILE (Get Current Logged In User)
+        //This bad boy returns the whole user object... I'm pretty sure
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -120,6 +148,28 @@ namespace Ready.Controllers
             if (firebaseUserId != null)
             {
                 return _UserProfileRepository.GetByFirebaseUserId(firebaseUserId);
+            }
+            else
+            {
+                return null;
+            }
+
+
+
+        }
+
+        //--------------------f------------------------------------------------------
+        //HELPER FUNCTION!!!!!!!!!!     GET CURRENT USER PROFILE (Get Current Logged In User)
+        //This bad boy returns the whole user object... I'm pretty sure
+        private UserProfile GetCurrentUserProfileId()
+        {
+            
+            var UserProfileId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            //UserProfileId = parseInt(UserProfileId);
+
+            if (UserProfileId != null)
+            {
+                return _UserProfileRepository.GetUserById(UserProfileId);
             }
             else
             {

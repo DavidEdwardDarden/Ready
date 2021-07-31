@@ -1,6 +1,3 @@
-import React,  { createContext, useContext, useState } from "react"
-import { UserProfileContext } from "./postUserProfileManager"
-import firebase from "firebase/app";
 import "firebase/auth";
 import { getToken } from "./authManager";
 
@@ -15,7 +12,7 @@ export const getAllQuestions = () => {
         }
       }).then(resp => {
         if (resp.ok) {
-            console.log(resp,"oooooo")
+            // console.log(resp,"oooooo")
           return resp.json();
           
         } else {
@@ -57,7 +54,7 @@ export const getAllQuestions = () => {
         }
       }).then(resp => {
         if (resp.ok) {
-            console.log(resp,"testing GetAllQuestionsByFirebaseUserId")
+            // console.log(resp,"testing GetAllQuestionsByFirebaseUserId")
           return resp.json();
           
         } else {
@@ -87,6 +84,36 @@ export const getAllQuestions = () => {
     });
   };
 
+  export const deleteQuestion = (Id) => {
+    return getToken().then((token) => {
+        return fetch(`${_apiUrl}/${Id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
+            
+        })
+    });
+};
+
+export const getQuestionById = (Id) => {
+    return getToken().then((token) => {
+        return fetch(`${_apiUrl}/${Id}`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        }).then(res => {
+            // console.log(res)
+            if (res.ok) {
+                return res.json();
+            } else {
+                throw new Error("An unknown error occurred while trying to get the comment.");
+            }
+        });
+    });
+};
 
 
 

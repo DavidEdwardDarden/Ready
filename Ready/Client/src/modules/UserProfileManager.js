@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Spinner } from "reactstrap";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -9,7 +9,7 @@ export function UserProfileProvider(props) {
   const apiUrl = "/api/userprofile";
 
   const userProfile = sessionStorage.getItem("userProfile");
-  const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
+  const [isLoggedIn] = useState(userProfile != null);
   const [userProfiles, setUserProfiles] = useState([])
   const [currentUserId, setCurrentUserId] = useState(0);
 
