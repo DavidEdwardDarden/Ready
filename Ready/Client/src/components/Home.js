@@ -38,19 +38,6 @@ useEffect(() => {
     setFirebaseUserProfileId(firebase.auth().currentUser.uid)
 }, [])
 
-// const handleControlledInputChange = (e) => {
-//   let newPost = { ...post };
-//   let selectedVal = e.target.value
-
-//   if (e.target.id.includes('Id')) {
-//     selectedVal = parseInt(selectedVal)
-//   }
-
-//   newPost[ e.target.id ] = selectedVal
-//   setPost(newPost);
-// };
-
-
 const handleDropdownChange = (e) => {
   e.preventDefault()
 
@@ -76,16 +63,8 @@ const handleClickEvent = (e) => {
   if (category === '') {
     alert("Please select a category")
   } else {
-    //SET FIREBASE USER ID HERE
-    // let newFBUID = { ...firebaseUserProfileId };
 
-    // newFBUID.firebaseUserProfileId = firebaseUserProfileId;
-
-
-    
       setFirebaseUserProfileId(firebase.auth().currentUser.uid)
-   
-
 
      history.push(`/Quiz/${category}/${FirebaseUserProfileId}`);
   } 

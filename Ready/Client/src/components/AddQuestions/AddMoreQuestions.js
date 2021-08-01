@@ -19,8 +19,16 @@ const AddQuestions = () => {
     const [ IsLoading, setIsLoading ] = useState(false);
     const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
     const [CategoryId, setCategoryId] = useState(0);
+    // const [s,setS] = useState(0)
 
     const history = useHistory();
+
+    //! HANDLE ALERT MESSAGE
+const handleAlertMessage = () => {
+    
+    alert("Question Submitted..Add another question or Press Exit")
+ 
+};
 
     //! CATEGORY        DROPDOWN SELECTION
     const handleDropdownChange = (e) => {
@@ -63,6 +71,7 @@ const AddQuestions = () => {
 
  //!  SET STATE ---------------------------------------
 useEffect(() => {
+  handleAlertMessage()
     getAllCategories()
     .then(res => {
       setCategoryList(res)
@@ -93,7 +102,7 @@ const handleSaveEvent = (evt) => {
         setQuestion(question.CategoryId)
 
         addQuestion(question) 
-            .then(() => history.push('/addmorequestions'));
+            .then(() => window.location.reload());
     };
 };
 
@@ -115,6 +124,7 @@ const handleClickEvent = (e) => {
   return (
     <>
       <div className="orange">
+        <div>AddMorePage</div>
         <img src={thing2} className="centermequizcrown" alt="user img2" />
         {/* <img src={thing} className="centermequiz" alt="user img" /> */}
         <img src={thing3} className="centerme7" alt="user img3" />

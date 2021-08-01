@@ -112,12 +112,12 @@ namespace Ready.Controllers
         [HttpGet("{Id}")]
         public IActionResult Get(int Id)
         {
-            var tag = _QuestionRepository.GetQuestionById(Id);
-            if (tag == null)
+            var question = _QuestionRepository.GetQuestionById(Id);
+            if (question == null)
             {
                 return NotFound();
             }
-            return Ok(tag);
+            return Ok(question);
         }
 
 
@@ -127,10 +127,22 @@ namespace Ready.Controllers
         public IActionResult AddQuestion(Question question)
         {
 
-          
-            DateTime dateCreated = DateTime.Now;
-            question.Learned = false;
+            //There are 7 columns in the Questions table that must be filled to Add an object to the table
+            //1. Id (Covered in the return and the question repository)
+            //2. UserProfileId(set with helper function below)
+            //3. Question Content (coming from front end input)
+            //4. Answer Content (coming from front end input)
+            //5. Learned (set below)
+            //6. CreateDateTime (set below)
+            //7. Category Id (MUST COME FROM FRONT END.... don't have set up yet!????????????????????????????????)
 
+            var user = GetCurrentUserProfile(); //#2
+            question.UserProfileId = user.Id; //#2
+            question.Learned = false; //#5
+            DateTime dateCreated = DateTime.Now; //#6
+            question.CreateDateTime = dateCreated; //#6
+           
+           
             _QuestionRepository.AddQuestion(question);
             return CreatedAtAction("Get", new { id = question.Id }, question);
 
@@ -139,7 +151,7 @@ namespace Ready.Controllers
 
         //--------------------f------------------------------------------------------
         //HELPER FUNCTION!!!!!!!!!!     GET CURRENT USER PROFILE (Get Current Logged In User)
-        //This bad boy returns the whole user object... I'm pretty sure
+        //This bad boy returns the whole user object... I'm pretty sure...THE WHOLE OBJECT!  The whole user object
         private UserProfile GetCurrentUserProfile()
         {
             var firebaseUserId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -159,117 +171,26 @@ namespace Ready.Controllers
         }
 
         //--------------------f------------------------------------------------------
-        //HELPER FUNCTION!!!!!!!!!!     GET CURRENT USER PROFILE (Get Current Logged In User)
+        //HELPER FUNCTION!!!!!!!!!!     GET CURRENT USER PROFILE ID(Get Current Logged In User)
         //This bad boy returns the whole user object... I'm pretty sure
-        private UserProfile GetCurrentUserProfileId()
-        {
-            
-            var UserProfileId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            //UserProfileId = parseInt(UserProfileId);
-
-            if (UserProfileId != null)
-            {
-                return _UserProfileRepository.GetUserById(UserProfileId);
-            }
-            else
-            {
-                return null;
-            }
-
-
-
-        }
-
-
-        //----------------------------------------------------------------------
-        //GET A CATEGORY BY ID
-        //[HttpGet("{CategoryId}")]
-        //public IActionResult Get(int CategoryId)
+        //private UserProfile GetCurrentUserProfileId()
         //{
-        //    var question = _QuestionRepository.GetAllQuestionsByCategoryId(CategoryId);
-        //    if (question == null)
+            
+        //    int UserProfileId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+        //    //UserProfileId = parseInt(UserProfileId);
+
+        //    if (UserProfileId != 0)
         //    {
-        //        return NotFound();
+        //        return _UserProfileRepository.GetUserById(UserProfileId);
         //    }
-        //    return Ok(question);
+        //    else
+        //    {
+        //        return null;
+        //    }
+
+
+
         //}
 
-        //----------------------------------------------------------------------
-
-        //    // GET: QuestionController
-        //    public ActionResult Index()
-        //    {
-        //        return View();
-        //    }
-
-        //    // GET: QuestionController/Details/5
-        //    public ActionResult Details(int id)
-        //    {
-        //        return View();
-        //    }
-
-        //    // GET: QuestionController/Create
-        //    public ActionResult Create()
-        //    {
-        //        return View();
-        //    }
-
-        //    // POST: QuestionController/Create
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public ActionResult Create(IFormCollection collection)
-        //    {
-        //        try
-        //        {
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch
-        //        {
-        //            return View();
-        //        }
-        //    }
-
-        //    // GET: QuestionController/Edit/5
-        //    public ActionResult Edit(int id)
-        //    {
-        //        return View();
-        //    }
-
-        //    // POST: QuestionController/Edit/5
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public ActionResult Edit(int id, IFormCollection collection)
-        //    {
-        //        try
-        //        {
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch
-        //        {
-        //            return View();
-        //        }
-        //    }
-
-        //    // GET: QuestionController/Delete/5
-        //    public ActionResult Delete(int id)
-        //    {
-        //        return View();
-        //    }
-
-        //    // POST: QuestionController/Delete/5
-        //    [HttpPost]
-        //    [ValidateAntiForgeryToken]
-        //    public ActionResult Delete(int id, IFormCollection collection)
-        //    {
-        //        try
-        //        {
-        //            return RedirectToAction(nameof(Index));
-        //        }
-        //        catch
-        //        {
-        //            return View();
-        //        }
-        //    }
-        //}
     }
 }

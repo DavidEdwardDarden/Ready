@@ -302,7 +302,7 @@ namespace Ready.Repositories
                     //COULD HAVE USED THE FOLLOWING... WHAT IS THE DIFFERENCE?
                     //cmd.Parameters.AddWithValue("@CategoryId", question.CategoryId);
 
-                    question.Id = (int)cmd.ExecuteScalar();
+                
                 }
             }
         }
