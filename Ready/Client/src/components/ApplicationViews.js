@@ -10,6 +10,7 @@ import Victory from "./Quiz/Victory"
 import MyQuestions from "./MyQuestions/MyQuestions"
 import EditQuestion from "./EditQuestion/EditQuestion"
 import AddQuestions from "./AddQuestions/AddQuestions"
+import AddMoreQuestions from "./AddQuestions/AddMoreQuestions"
 
 export default function ApplicationViews({ isLoggedIn }) {
   // console.log(isLoggedIn)
@@ -40,6 +41,11 @@ export default function ApplicationViews({ isLoggedIn }) {
 
      <Route exact path="/addquestions" >
        {isLoggedIn ? <AddQuestions /> : <Redirect to="/login" />}
+       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
+     </Route>
+
+     <Route exact path="/addmorequestions" >
+       {isLoggedIn ? <AddMoreQuestions /> : <Redirect to="/login" />}
        {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
      </Route>
 
