@@ -63,37 +63,11 @@ namespace Ready.Controllers
             }
             return Ok();
         }
-        //[HttpDelete("activate/{id}")]
-        //public IActionResult Activate(int id)
-        //{
-        //    _userProfileRepository.Activate(id);
-        //    return NoContent();
-        //}
-
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    int msg = 200;
-        //    if (!_userProfileRepository.Delete(id)) msg = 666;
-        //    return StatusCode(msg);
-        //}
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, UserProfile user)
-        //{
-        //    if (id != user.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    _userProfileRepository.Edit(user);
-        //    return Ok(user);
-        //}
 
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
             userProfile.CreateDateTime = DateTime.Now;
-            //userProfile.UserTypeId = UserType.AUTHOR_ID;
             _userProfileRepository.Add(userProfile);
             return CreatedAtAction(
                 nameof(GetUserProfile),

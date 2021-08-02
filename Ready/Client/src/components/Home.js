@@ -11,10 +11,7 @@ import { useHistory } from "react-router-dom";
 import { getAllCategories } from "../modules/categoryManager";
 import "firebase/auth";
 import firebase from "firebase/app";
-import {
-  GetAllQuestionsByFirebaseUserId,
-  GetAllQuestionsByFirebaseUserIdandCategoryId,
-} from "../modules/quizManager";
+import { GetAllQuestionsByFirebaseUserId } from "../modules/quizManager";
 
 const Home = () => {
   const [category, setCategory] = useState("");
@@ -22,7 +19,7 @@ const Home = () => {
   const [IsLoading, setIsLoading] = useState(false);
   // const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
   const [questionList, setQuestionList] = useState([]);
-  const [categoryQuestionList, setCategoryQuestionList] = useState([]);
+  // const [categoryQuestionList, setCategoryQuestionList] = useState([]);
 
   const history = useHistory();
 
@@ -62,13 +59,8 @@ const Home = () => {
   };
 
   const hasQuestionInCategory = () => {
-    // let b=[];
-    console.log(questionList);
-
-    console.log(category);
     //THIS took me 5 hours to get right... all because of that ParseInt
     let brainHurts = questionList.map((question) => question.categoryId);
-    console.log(brainHurts);
     if (brainHurts.includes(parseInt(category)) === true) {
       return "Yes";
     } else {
@@ -76,20 +68,12 @@ const Home = () => {
     }
   };
 
-  // const getCQList = () => {
-  //   GetAllQuestionsByFirebaseUserIdandCategoryId(category).then((results) => {
-  //     setCategoryQuestionList(results);
-  //     });
-  //    };
-
   //  //!  SET STATE  ---------------------------------------
   useEffect(() => {
     getQList();
-    // console.log(hasQuestionInCategory())
   }, []);
 
   const handleClickEvent = (e) => {
-    // getCQList();
     e.preventDefault();
 
     setIsLoading(true);
@@ -98,12 +82,12 @@ const Home = () => {
     } else {
       let tf = hasQuestionInCategory();
       console.log(tf);
+      //set as t or f below
       if (tf === "No") {
         alert(
           "You have no questions in this category. Add Some Questions in this category to begin"
         );
       } else {
-        // history.push(`/Quiz/${category}/${FirebaseUserProfileId}`);
         history.push(`/Quiz/${category}`);
       }
     }

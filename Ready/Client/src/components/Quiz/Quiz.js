@@ -35,7 +35,7 @@ const Quiz = () => {
 
 
   const setUpQL=()=>{
-    // let updatedQList = questionList.splice(x+1,1);
+   
     let updatedQList = [];
 
     for(let i=0;i<questionList.length;i++){

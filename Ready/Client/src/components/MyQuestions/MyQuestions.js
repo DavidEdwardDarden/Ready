@@ -12,7 +12,7 @@ import { deleteQuestion} from "../../modules/quizManager";
 
 const MyQuestions = () => {
   const [questionList, setQuestionList] = useState([]);
-  const [ setIsLoading] = useState(false);
+  const [isLoading ,setIsLoading] = useState(false);
   const history = useHistory();
 
   //!  QUESTION ARRAY  ---------------------------------------

@@ -173,31 +173,7 @@ namespace Ready.Controllers
                 return null;
             }
 
-
-
         }
-
-        //--------------------f------------------------------------------------------
-        //HELPER FUNCTION!!!!!!!!!!     GET CURRENT USER PROFILE ID(Get Current Logged In User)
-        //This bad boy returns the whole user object... I'm pretty sure
-        //private UserProfile GetCurrentUserProfileId()
-        //{
-            
-        //    int UserProfileId = Int32.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-        //    //UserProfileId = parseInt(UserProfileId);
-
-        //    if (UserProfileId != 0)
-        //    {
-        //        return _UserProfileRepository.GetUserById(UserProfileId);
-        //    }
-        //    else
-        //    {
-        //        return null;
-        //    }
-
-
-
-        //}
 
     }
 }

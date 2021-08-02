@@ -39,33 +39,8 @@ namespace Ready.Repositories
             return user;
         }
 
-        //public void Edit(UserProfile toEdit)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"Update UserProfile 
-        //                                set FirstName = @firstName,
-        //                                    LastName = @lastName,
-        //                                    Email = @email,
-        //                                    DisplayName = @displayName,
-        //                                    ImageLocation = @imageLocation,
-        //                                    UserTypeId = @userTypeId
-        //                                where Id = @id";
-        //            cmd.Parameters.AddWithValue("@firstName", toEdit.FirstName);
-        //            cmd.Parameters.AddWithValue("@lastName", toEdit.LastName);
-        //            cmd.Parameters.AddWithValue("@email", toEdit.Email);
-        //            cmd.Parameters.AddWithValue("@imageLocation", toEdit.ImageLocation);
-        //            cmd.Parameters.AddWithValue("@displayName", toEdit.DisplayName);
-        //            cmd.Parameters.AddWithValue("@userTypeId", toEdit.UserTypeId);
-        //            cmd.Parameters.AddWithValue("@id", toEdit.Id);
-        //            cmd.ExecuteNonQuery();
-        //        }
-        //        conn.Close();
-        //    }
-        //}
+
+
         public List<UserProfile> GetAllUsers()
         {
             List<UserProfile> AllUsers = new List<UserProfile>();
@@ -168,45 +143,7 @@ namespace Ready.Repositories
                 }
             }
         }
-        //public void Activate(int id)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"Update UserProfile 
-        //                                set IsDeleted = 0 
-        //                                Where Id = @id";
-        //            DbUtils.AddParameter(cmd, "@id", id);
-        //            cmd.ExecuteScalar();
-        //        }
-        //        conn.Close();
-        //    }
-        //}
-
-        //public bool Delete(int id)
-        //{
-        //    UserProfile testForAdmin = GetUserById(id);
-        //    if (testForAdmin.UserTypeId == 2)
-        //    {
-        //        if (CheckForLastAdmin()) return false;
-        //    }
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"Update UserProfile 
-        //                                set IsDeleted = 1 
-        //                                Where Id = @id";
-        //            DbUtils.AddParameter(cmd, "@id", id);
-        //            cmd.ExecuteScalar();
-        //        }
-        //        conn.Close();
-        //        return true;
-        //    }
-        //}
+     
         public void Add(UserProfile userProfile)
         {
             using (var conn = Connection)
@@ -228,26 +165,6 @@ namespace Ready.Repositories
                 }
             }
         }
-        //private bool CheckForLastAdmin()
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"
-        //                            Select Count(*) From UserProfile
-        //                            Where UserTypeId = 2 and IsDeleted = 0";
-        //            var admins = cmd.ExecuteScalar();
-        //            if ((int)admins == 1)
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //    return false;
-        //}
-
 
     }
 }

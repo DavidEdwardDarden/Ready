@@ -17,7 +17,7 @@ const AddQuestions = () => {
     const [category, setCategory] = useState("");
     const [ categoryList, setCategoryList ] = useState([]);
     const [ IsLoading, setIsLoading ] = useState(false);
-    const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
+    // const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
     const [CategoryId, setCategoryId] = useState(0);
 
     const history = useHistory();
@@ -67,7 +67,7 @@ useEffect(() => {
     .then(res => {
       setCategoryList(res)
     })
-    setFirebaseUserProfileId(firebase.auth().currentUser.uid)
+    // setFirebaseUserProfileId(firebase.auth().currentUser.uid)
     // getQuestionById(Id).then(setQuestion)
    
 }, []);
@@ -81,13 +81,6 @@ const handleSaveEvent = (evt) => {
     if (question.QuestionContent === "" || question.AnswerContent === "" ||category === '') {
         window.alert("Please fill in all fields and select a category.")
     } else {
-
-
-       
-
-        //I need to set the question.CategoryId equal to category.id
-        // question.CategoryId = category.id
-        // setQuestion(question.CategoryId)
 
       question.CategoryId=parseInt(category)
         setQuestion(question.CategoryId)
