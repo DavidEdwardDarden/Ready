@@ -134,7 +134,7 @@ namespace Ready.Controllers
             //4. Answer Content (coming from front end input)
             //5. Learned (set below)
             //6. CreateDateTime (set below)
-            //7. Category Id (MUST COME FROM FRONT END.... don't have set up yet!????????????????????????????????)
+            //7. Category Id (FROM FRONT END.)
 
             var user = GetCurrentUserProfile(); //#2
             question.UserProfileId = user.Id; //#2
@@ -149,6 +149,7 @@ namespace Ready.Controllers
 
         }
 
+       
         //--------------------f------------------------------------------------------
         //HELPER FUNCTION!!!!!!!!!!     GET CURRENT USER PROFILE (Get Current Logged In User)
         //This bad boy returns the whole user object... I'm pretty sure...THE WHOLE OBJECT!  The whole user object

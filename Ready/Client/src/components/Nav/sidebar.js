@@ -3,12 +3,14 @@ import React from "react";
 import { slide as Menu } from "react-burger-menu";
 import firebase from "firebase/app";
 import "firebase/auth";
+import { useHistory } from "react-router-dom";
 
 export default props => {
-
+  const history = useHistory();
 
 const shutdoor = ()=>{
-  firebase.auth().signOut()
+  firebase.auth().signOut().then(()=>history.push('/login'))
+
 }
 
 

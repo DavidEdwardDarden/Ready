@@ -124,7 +124,7 @@ const handleClickEvent = (e) => {
   return (
     <>
       <div className="orange">
-        <div>AddMorePage</div>
+        {/* <div>AddMorePage</div> */}
         <img src={thing2} className="centermequizcrown" alt="user img2" />
         {/* <img src={thing} className="centermequiz" alt="user img" /> */}
         <img src={thing3} className="centerme7" alt="user img3" />

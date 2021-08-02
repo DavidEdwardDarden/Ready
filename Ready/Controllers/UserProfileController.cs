@@ -89,16 +89,16 @@ namespace Ready.Controllers
         //    return Ok(user);
         //}
 
-        //[HttpPost]
-        //public IActionResult Post(UserProfile userProfile)
-        //{
-        //    userProfile.CreateDateTime = DateTime.Now;
-        //    //userProfile.UserTypeId = UserType.AUTHOR_ID;
-        //    _userProfileRepository.Add(userProfile);
-        //    return CreatedAtAction(
-        //        nameof(GetUserProfile),
-        //        new { firebaseUserId = userProfile.FirebaseUserId },
-        //        userProfile);
-        //}
+        [HttpPost]
+        public IActionResult Post(UserProfile userProfile)
+        {
+            userProfile.CreateDateTime = DateTime.Now;
+            //userProfile.UserTypeId = UserType.AUTHOR_ID;
+            _userProfileRepository.Add(userProfile);
+            return CreatedAtAction(
+                nameof(GetUserProfile),
+                new { firebaseUserId = userProfile.FirebaseUserId },
+                userProfile);
+        }
     }
 }

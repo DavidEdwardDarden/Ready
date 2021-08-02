@@ -1,25 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import { register } from "../modules/authManager";
+import {GetAllQuestionsByFirebaseUserId, addQuestion} from "../modules/quizManager";
+import "firebase/auth";
+import firebase from "firebase/app";
+// import "../Home.css";
 
 export default function Register() {
   const history = useHistory();
 
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
-  const [displayName, setDisplayName] = useState();
   const [email, setEmail] = useState();
-  const [imageLocation, setImageLocation] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  // const [questionList, setQuestionList] = useState([]);
+
+
+
+
+//  //!  SET STATE ---------------------------------------
+//  useEffect(() => {
+//   getQList();
+//   addCoreQuestions();
+// }, []);
+
+
+
+// //!  QUESTION ARRAY  ---------------------------------------
+// const getQList = () => {
+//   GetAllQuestionsByFirebaseUserId("34p6LLy3cYbugAO2sf5pCRcw12r1").then(
+//     (results) => {
+//       setQuestionList(results);
+//     }
+//   );
+// };
+
+// //! ASSIGN CORE QUESTIONS --------------------------------------
+// const addCoreQuestions = () => {
+//   questionList.map(question =>addQuestion(question))
+// }
+
+// //!--------------------------------------------------------------
+
+
 
   const registerClick = (e) => {
     e.preventDefault();
     if (password && password !== confirmPassword) {
       alert("Passwords don't match. Do better.");
     } else {
-      const userProfile = { firstName, lastName, displayName, imageLocation, email };
+      const userProfile = { firstName, lastName, email };
       register(userProfile, password)
         .then(() => history.push("/"));
     }
@@ -38,16 +70,8 @@ export default function Register() {
             <Input id="lastName" type="text" onChange={e => setLastName(e.target.value)} />
           </FormGroup>
           <FormGroup>
-            <Label htmlFor="displayName">Display Name</Label>
-            <Input id="displayName" type="text" onChange={e => setDisplayName(e.target.value)} />
-          </FormGroup>
-          <FormGroup>
             <Label for="email">Email</Label>
             <Input id="email" type="text" onChange={e => setEmail(e.target.value)} />
-          </FormGroup>
-          <FormGroup>
-            <Label htmlFor="imageLocation">Profile Image URL</Label>
-            <Input id="imageLocation" type="text" onChange={e => setImageLocation(e.target.value)} />
           </FormGroup>
           <FormGroup>
             <Label for="password">Password</Label>
@@ -60,6 +84,9 @@ export default function Register() {
           <FormGroup>
             <Button>Register</Button>
           </FormGroup>
+          <em>
+            Return to Login? <Link to="login">Login</Link>
+          </em>
         </fieldset>
       </Form>
     </div>
