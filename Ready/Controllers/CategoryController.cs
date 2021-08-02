@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Ready.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
 
@@ -25,6 +25,7 @@ namespace Ready.Controllers
         //-----------------------------------------------------------------------
         //GET ALL CATEGORIES
         // GET: CategoryController
+        //[Authorize]
         [HttpGet]
         public IActionResult Get()
         {
@@ -33,6 +34,7 @@ namespace Ready.Controllers
 
         //----------------------------------------------------------------------
         //ADD A CATEGORY NAME
+        //[Authorize]
         [HttpPost]
         public IActionResult AddCategory(Category category)
         {
@@ -42,7 +44,7 @@ namespace Ready.Controllers
 
         //----------------------------------------------------------------------
         //DELETE A CATEGORY
-
+        //[Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -52,6 +54,7 @@ namespace Ready.Controllers
 
         //----------------------------------------------------------------------
         //GET A CATEGORY BY ID
+        //[Authorize]
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -65,7 +68,7 @@ namespace Ready.Controllers
 
         //----------------------------------------------------------------------
         //EDIT CATEGORY
-
+        //[Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, Category category)
         {

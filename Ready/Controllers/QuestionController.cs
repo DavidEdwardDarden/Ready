@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ready.Models;
 using Ready.Repositories;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace Ready.Controllers
 {
     //SET [Authorize] for every INDIVIDUAL thing EXCEPT where you use the helper function AND Login stuff
-    //[Authorize]
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class QuestionController : ControllerBase
@@ -28,6 +29,7 @@ namespace Ready.Controllers
         //-----------------------------------------------------------------------
         //GET ALL QUESTIONS
         // GET: QuestionController
+        //[Authorize]
         [HttpGet]
         public IActionResult Get()
         {
@@ -37,6 +39,7 @@ namespace Ready.Controllers
         //-----------------------------------------------------------------------
         //GET ALL QUESTIONS BY FIREBASE USER ID AND CATEGORY ID
         // GET: QuestionController
+        //[Authorize]
         [HttpGet("Quiz/{CategoryId}")]
         public IActionResult GetAllQuestionsByFirebaseUserIdandCategoryId(int CategoryId)
         {
@@ -61,7 +64,7 @@ namespace Ready.Controllers
         //-----------------------------------------------------------------------
         //GET ALL QUESTIONS BY FIREBASE USER ID
         // GET: QuestionController
-
+        //[Authorize]
         [HttpGet("MyQuestionsList")]
         public IActionResult GetAllQuestionsByFirebaseUserId()
         {
@@ -84,6 +87,7 @@ namespace Ready.Controllers
 
         //---------------------------------------------------------------------
         //DELETE
+        //[Authorize]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
@@ -94,7 +98,7 @@ namespace Ready.Controllers
 
         //----------------------------------------------------------------------
         //EDIT Question
-
+        //[Authorize]
         [HttpPut("{id}")]
         public IActionResult Put(int id, Question question)
         {
@@ -109,6 +113,7 @@ namespace Ready.Controllers
 
         //---------------------------------------------------------------------
         //GET Question by Id
+        //[Authorize]
         [HttpGet("{Id}")]
         public IActionResult Get(int Id)
         {
@@ -123,6 +128,7 @@ namespace Ready.Controllers
 
         //---------------------------------------------------------------------
         //ADD Question
+        //[Authorize]
         [HttpPost]
         public IActionResult AddQuestion(Question question)
         {

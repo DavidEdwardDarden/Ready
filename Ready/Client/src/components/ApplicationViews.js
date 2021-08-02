@@ -5,55 +5,53 @@ import Register from "./Register";
 import Home from "./Home";
 import "./Nav/sidebar.css";
 import SideBar from "./Nav/sidebar";
-import Quiz from "./Quiz/Quiz"
-import Victory from "./Quiz/Victory"
-import MyQuestions from "./MyQuestions/MyQuestions"
-import EditQuestion from "./EditQuestion/EditQuestion"
-import AddQuestions from "./AddQuestions/AddQuestions"
-import AddMoreQuestions from "./AddQuestions/AddMoreQuestions"
+import Quiz from "./Quiz/Quiz";
+import Victory from "./Quiz/Victory";
+import MyQuestions from "./MyQuestions/MyQuestions";
+import EditQuestion from "./EditQuestion/EditQuestion";
+import AddQuestions from "./AddQuestions/AddQuestions";
+import AddMoreQuestions from "./AddQuestions/AddMoreQuestions";
 
 export default function ApplicationViews({ isLoggedIn }) {
   // console.log(isLoggedIn)
   return (
     <main>
       <Switch>
-
-        
         <Route path="/" exact>
           {isLoggedIn ? <Home /> : <Redirect to="/login" />}
-          {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
+          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
         </Route>
 
-        <Route exact path="/Quiz/:CategoryId(\d+)/:FirebaseUserProfileId" > 
-       {isLoggedIn ? <Quiz /> : <Redirect to="/login" />}
-       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
-     </Route>
+        <Route exact path="/Quiz/:CategoryId(\d+)">
+          {isLoggedIn ? <Quiz /> : <Redirect to="/login" />}
+          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+        </Route>
 
-     <Route exact path="/Victory" >
-       {isLoggedIn ? <Victory /> : <Redirect to="/login" />}
-       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
-     </Route>
+        <Route exact path="/Victory">
+          {isLoggedIn ? <Victory /> : <Redirect to="/login" />}
+          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+        </Route>
 
-     <Route exact path="/myquestions" >
-       {isLoggedIn ? <MyQuestions /> : <Redirect to="/login" />}
-       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
-     </Route>
+        <Route exact path="/myquestions">
+          {isLoggedIn ? <MyQuestions /> : <Redirect to="/login" />}
+          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+        </Route>
 
-     <Route exact path="/addquestions" >
-       {isLoggedIn ? <AddQuestions /> : <Redirect to="/login" />}
-       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
-     </Route>
+        <Route exact path="/addquestions">
+          {isLoggedIn ? <AddQuestions /> : <Redirect to="/login" />}
+          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+        </Route>
 
-     <Route exact path="/addmorequestions" >
-       {isLoggedIn ? <AddMoreQuestions /> : <Redirect to="/login" />}
-       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
-     </Route>
+        <Route exact path="/addmorequestions">
+          {isLoggedIn ? <AddMoreQuestions /> : <Redirect to="/login" />}
+          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+        </Route>
 
-     {/* `/question/edit/${question.id}` */}
-     <Route exact path="/question/edit/:Id(\d+)" >
-       {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
-       {isLoggedIn ?<SideBar /> : <Redirect to="/login" />}
-     </Route>
+        {/* `/question/edit/${question.id}` */}
+        <Route exact path="/question/edit/:Id(\d+)">
+          {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
+          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+        </Route>
 
         <Route path="/login">
           <Login />
@@ -62,7 +60,7 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route path="/register">
           <Register />
         </Route>
-{/* 
+        {/* 
         <Route path="/category" exact>
           {isLoggedIn ? <CategoryList /> : <Redirect to="/login" />}
         </Route>
