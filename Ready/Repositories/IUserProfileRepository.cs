@@ -8,6 +8,8 @@ namespace Ready.Repositories
 {
     public interface IUserProfileRepository
     {
+        void Add(UserProfile userProfile);
+
         //void Activate(int id);
         //void Add(UserProfile userProfile);
         UserProfile CheckUnique(UserProfile user);

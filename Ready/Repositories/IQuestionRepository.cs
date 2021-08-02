@@ -23,5 +23,6 @@ namespace Ready.Repositories
         public Question GetQuestionById(int Id);
 
         public void AddQuestion(Question question);
+
     }
 }

@@ -27,8 +27,7 @@ namespace Ready.Repositories
                     {
                         user.Email = user.Email + " !!Exists";
                     }
-                    cmd.CommandText = "Select count(*) From UserProfile where DisplayName = @displayName and Id != @id";
-                    cmd.Parameters.AddWithValue("@displayName", user.FirstName);
+                    cmd.CommandText = "Select count(*) From UserProfile Id != @id";
                     var dnValue = cmd.ExecuteScalar();
                     if ((int)dnValue > 0)
                     {
@@ -208,31 +207,27 @@ namespace Ready.Repositories
         //        return true;
         //    }
         //}
-        //public void Add(UserProfile userProfile)
-        //{
-        //    using (var conn = Connection)
-        //    {
-        //        conn.Open();
-        //        using (var cmd = conn.CreateCommand())
-        //        {
-        //            cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-        //                                                         Email, CreateDateTime, ImageLocation, UserTypeId)
-        //                                OUTPUT INSERTED.ID
-        //                                VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-        //                                        @Email, @CreateDateTime, @ImageLocation, @UserTypeId)";
-        //            DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
-        //            DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
-        //            DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-        //            DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
-        //            DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
-        //            DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-        //            DbUtils.AddParameter(cmd, "@ImageLocation", userProfile.ImageLocation);
-        //            DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
-
-        //            userProfile.Id = (int)cmd.ExecuteScalar();
-        //        }
-        //    }
-        //}
+        public void Add(UserProfile userProfile)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, 
+                                                                 Email, CreateDateTime)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@FirebaseUserId, @FirstName, @LastName,  
+                                                @Email, @CreateDateTime)";
+                    DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
+                    DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
+                    DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
+                    DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+                    userProfile.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
         //private bool CheckForLastAdmin()
         //{
         //    using (var conn = Connection)
