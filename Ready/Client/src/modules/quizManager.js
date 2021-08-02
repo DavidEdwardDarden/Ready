@@ -33,10 +33,10 @@ export const GetAllQuestionsByFirebaseUserIdandCategoryId = (CategoryId) => {
       },
     }).then((resp) => {
       if (resp.ok) {
-        console.log(
-          resp,
-          "testing GetAllQuestionsByFirebaseUserIdandCategoryId"
-        );
+        // console.log(
+        //   resp,
+        //   "testing GetAllQuestionsByFirebaseUserIdandCategoryId"
+        // );
         return resp.json();
       } else {
         throw new Error(

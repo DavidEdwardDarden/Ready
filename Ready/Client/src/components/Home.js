@@ -20,23 +20,18 @@ const Home = () => {
   const [category, setCategory] = useState("");
   const [categoryList, setCategoryList] = useState([]);
   const [IsLoading, setIsLoading] = useState(false);
-  const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
+  // const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
   const [questionList, setQuestionList] = useState([]);
   const [categoryQuestionList, setCategoryQuestionList] = useState([]);
 
   const history = useHistory();
-
-  // const fetchFirebaseUserProfileId = () => {
-
-  //   return firebase.auth().currentUser.uid
-  // }
 
   //fetch list of all categories for dropdown
   useEffect(() => {
     getAllCategories().then((res) => {
       setCategoryList(res);
     });
-    setFirebaseUserProfileId(firebase.auth().currentUser.uid);
+    // setFirebaseUserProfileId(firebase.auth().currentUser.uid);
   }, []);
 
   const handleDropdownChange = (e) => {
@@ -44,10 +39,6 @@ const Home = () => {
 
     let selectedVal = e.target.value;
     setCategory(selectedVal);
-    //below is the money but it wont update quick enough to recieve category
-    // getCQList();
-    console.log("anyyyyyything");
-    // console.log(hasQuestionInCategory())
   };
 
   const handleClickSaveEntry = (e) => {
@@ -56,12 +47,9 @@ const Home = () => {
     let newCategory = { ...category };
 
     newCategory.categoryId = category;
-    // console.log("hooooooowdy")
     if (category === "") {
       alert("Please select a category");
     }
-
-    // getCQList();
   };
 
   // //!  QUESTION ARRAY  ---------------------------------------
@@ -78,6 +66,7 @@ const Home = () => {
     console.log(questionList);
 
     console.log(category);
+    //THIS took me 5 hours to get right... all because of that ParseInt
     let brainHurts = questionList.map((question) => question.categoryId);
     console.log(brainHurts);
     if (brainHurts.includes(parseInt(category)) === true) {
@@ -114,7 +103,8 @@ const Home = () => {
           "You have no questions in this category. Add Some Questions in this category to begin"
         );
       } else {
-        history.push(`/Quiz/${category}/${FirebaseUserProfileId}`);
+        // history.push(`/Quiz/${category}/${FirebaseUserProfileId}`);
+        history.push(`/Quiz/${category}`);
       }
     }
   };
