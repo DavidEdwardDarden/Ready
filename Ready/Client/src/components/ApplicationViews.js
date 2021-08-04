@@ -14,43 +14,44 @@ import AddMoreQuestions from "./AddQuestions/AddMoreQuestions";
 
 export default function ApplicationViews({ isLoggedIn }) {
   // console.log(isLoggedIn)
+  //MAKE SURE TO PUT THE PATH TO THE NAV ON TOP IN THE ROUTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   return (
     <main>
       <Switch>
         <Route path="/" exact>
+        {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
           {isLoggedIn ? <Home /> : <Redirect to="/login" />}
-          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/Quiz/:CategoryId(\d+)">
+        {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
           {isLoggedIn ? <Quiz /> : <Redirect to="/login" />}
-          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/Victory">
+        {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
           {isLoggedIn ? <Victory /> : <Redirect to="/login" />}
-          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/myquestions">
+        {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
           {isLoggedIn ? <MyQuestions /> : <Redirect to="/login" />}
-          {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/addquestions">
-          {isLoggedIn ? <AddQuestions /> : <Redirect to="/login" />}
           {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+          {isLoggedIn ? <AddQuestions /> : <Redirect to="/login" />}
         </Route>
 
         <Route exact path="/addmorequestions">
-          {isLoggedIn ? <AddMoreQuestions /> : <Redirect to="/login" />}
           {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+          {isLoggedIn ? <AddMoreQuestions /> : <Redirect to="/login" />}
         </Route>
 
         {/* `/question/edit/${question.id}` */}
         <Route exact path="/question/edit/:Id(\d+)">
-          {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
           {isLoggedIn ? <SideBar /> : <Redirect to="/login" />}
+          {isLoggedIn ? <EditQuestion /> : <Redirect to="/login" />}
         </Route>
 
         <Route path="/login">
