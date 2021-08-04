@@ -1,4 +1,4 @@
-import { React, useState, useEffect} from "react";
+import { React, useState, useEffect } from "react";
 // import thing from "../images/ReadyLogo.jpg";
 import thing2 from "../images/crown.png";
 import thing3 from "../images/pattern2.png";
@@ -7,99 +7,98 @@ import { useHistory, useParams } from "react-router-dom";
 import { Form, FormGroup, Button, Container } from "reactstrap";
 import { getQuestionById } from "../../modules/quizManager";
 import { addQuestion } from "../../modules/quizManager";
-import { getAllCategories } from '../../modules/categoryManager';
+import { getAllCategories } from "../../modules/categoryManager";
 import "firebase/auth";
-import firebase from "firebase/app"
-
+import firebase from "firebase/app";
 
 const AddQuestions = () => {
-    const [question, setQuestion] = useState({});
-    const [category, setCategory] = useState("");
-    const [ categoryList, setCategoryList ] = useState([]);
-    const [ IsLoading, setIsLoading ] = useState(false);
-    const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
-    const [CategoryId, setCategoryId] = useState(0);
+  const [question, setQuestion] = useState({
+    questionContent: "",
+    answerContent: "",
+  });
+  const [category, setCategory] = useState(0);
+  const [categoryList, setCategoryList] = useState([]);
+  const [IsLoading, setIsLoading] = useState(false);
+  const [FirebaseUserProfileId, setFirebaseUserProfileId] = useState("");
+  const [CategoryId, setCategoryId] = useState(0);
+  const [refresh, setRefresh] = useState(false);
 
-    const history = useHistory();
+  const history = useHistory();
 
-    //! CATEGORY        DROPDOWN SELECTION
-    const handleDropdownChange = (e) => {
-        e.preventDefault()
-        let selectedVal = e.target.value;
-        setCategory(selectedVal);
-      };
-      
-      //! CATEGORY    DROPDOWN SELECTION (other part)
-      const handleClickSaveEntry = (e) => {
-        e.preventDefault();
-        setIsLoading(true);
-        let newCategory = { ...category };
-      //I just changed categoryId to CategoryId below
-        newCategory.CategoryId = category;
-        if (category === '') {
-          alert("Please select a category")
-        } 
-      }
-      
-   
+  //! HANDLE ALERT MESSAGE
+  const handleAlertMessage = () => {
+    alert("Question Submitted..Add another question or Press Exit");
+  };
 
+  //! CATEGORY        DROPDOWN SELECTION
+  const handleDropdownChange = (e) => {
+    e.preventDefault();
+    let selectedVal = e.target.value;
+    setCategory(selectedVal);
+  };
 
-//-----------------------------------------------------------------------------
-  
- 
- 
+  //! CATEGORY    DROPDOWN SELECTION (other part)
+  const handleClickSaveEntry = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    let newCategory = { ...category };
+    //I just changed categoryId to CategoryId below
+    newCategory.CategoryId = category;
+    if (category === "") {
+      alert("Please select a category");
+    }
+  };
 
+  //-----------------------------------------------------------------------------
 
-//! USER INPUT FIELDS
+  //! USER INPUT FIELDS
   const handleInputChange = (evt) => {
     const submittedQuestion = { ...question };
-    let selectedValue = evt.target.value
-    submittedQuestion[evt.target.id] = selectedValue
-    setQuestion(submittedQuestion)
-};
+    let selectedValue = evt.target.value;
+    submittedQuestion[evt.target.id] = selectedValue;
+    setQuestion(submittedQuestion);
+  };
 
-
-
-
- //!  SET STATE ---------------------------------------
-useEffect(() => {
-    getAllCategories()
-    .then(res => {
-      setCategoryList(res)
-    })
-    setFirebaseUserProfileId(firebase.auth().currentUser.uid)
+  //!  SET STATE ---------------------------------------
+  useEffect(() => {
+    getAllCategories().then((res) => {
+      setCategoryList(res);
+    });
+    setFirebaseUserProfileId(firebase.auth().currentUser.uid);
     // getQuestionById(Id).then(setQuestion)
-   
-}, []);
+    setRefresh(false);
+  }, [refresh]);
 
-  
+  console.log(question);
 
-//!  click ->  SAVE BUTTON ---------------------------------------
-const handleSaveEvent = (evt) => {
-   
+  //!  click ->  SAVE BUTTON ---------------------------------------
+  const handleSaveEvent = (evt) => {
+    //  debugger
     evt.preventDefault();
-    if (question.QuestionContent === "" || question.AnswerContent === "" ||category === '') {
-        window.alert("Please fill in all fields and select a category.")
+    if (
+      question.questionContent === "" ||
+      question.answerContent === "" ||
+      category === 0
+    ) {
+      window.alert("Please fill in all fields and select a category.");
     } else {
+      question.CategoryId = parseInt(category);
+      setQuestion(question.CategoryId);
 
+      addQuestion(question);
+      if (
+        window.confirm("Question Submitted..Add another question or Press Exit")
+      ) {
+        setQuestion({ questionContent: "", answerContent: "" });
+        setCategory(0);
+        setRefresh(true);
+        // window.location.reload()
+      }
+    }
+  };
 
-       
-
-        //I need to set the question.CategoryId equal to category.id
-        // question.CategoryId = category.id
-        // setQuestion(question.CategoryId)
-
-      question.CategoryId=parseInt(category)
-        setQuestion(question.CategoryId)
-
-        addQuestion(question) 
-            .then(() => history.push('/addmorequestions'));
-    };
-};
-
-
-//!  click ->  EXIT BUTTON ---------------------------------------
-const handleClickEvent = (e) => {
+  //!  click ->  EXIT BUTTON ---------------------------------------
+  const handleClickEvent = (e) => {
     e.preventDefault();
     setIsLoading(true);
     history.push(`/`);
@@ -107,9 +106,9 @@ const handleClickEvent = (e) => {
 
   //! click ->  Cancel BUTTON ---------------------------------------
   const handleCancelSave = (click) => {
-    click.preventDefault()
-    history.push('/myquestions')
-}
+    click.preventDefault();
+    history.push("/myquestions");
+  };
 
   //!  WELCOME TO THE DOM!  ---------------------------------------
   return (
@@ -123,64 +122,80 @@ const handleClickEvent = (e) => {
           Exit
         </button>
         {/* <div>{question.QuestionContent}</div> */}
-        <Container className="justified-content-center">
-            <Form>
-            <FormGroup>
-                    <label>Question</label>
-                    {/* <div>{question.QuestionContent}</div> */}
-                    {/* {console.log(question.questionContent)} */}
-                    <input type="text"
-                        id="questionContent"
-                        onChange={handleInputChange}
-                        required
-                        autoComplete="off"
-                        className="form-control"
-                        />
-                </FormGroup>
-                <FormGroup>
-                    <label>Answer</label>
-                    <input type="text"
-                        id="answerContent"
-                        onChange={handleInputChange}
-                        required
-                        autoComplete="off"
-                        className="form-control"
-                        />
-                </FormGroup>
-            </Form>
+        <Container>
+          <Form>
+            <FormGroup className="reposition">
+              <label>Question</label>
+              {/* <div>{question.QuestionContent}</div> */}
+              {/* {console.log(question.questionContent)} */}
+              <input
+                type="text"
+                id="questionContent"
+                onChange={handleInputChange}
+                required
+                autoComplete="off"
+                // className="form-control"
+                value={question.questionContent}
+                defaultValue={""}
+              />
+            </FormGroup>
+            <FormGroup className="reposition2">
+              <label>Answer</label>
+              <input
+                type="text"
+                id="answerContent"
+                onChange={handleInputChange}
+                required
+                autoComplete="off"
+                value={question.answerContent}
+                defaultValue={""}
+                // ref={(taco) => (question.answerContent = taco)}
+                // className="form-control"
+              />
+            </FormGroup>
+          </Form>
 
-            <fieldset>
-        <div className='post-form'>
-          <div className='category-dropdown'>
-
-            <label htmlFor="categories" className="centermebutton5">Choose a Category </label>
-            <select value={ category } className="centermebutton4" name="categories" onChange={ handleDropdownChange }>
-              <option value={ category} selected>Please Select a Category</option>
-              { categoryList.map(c => (
-                <option
-                  htmlFor={ c.name }
-                  key={ c.id * Math.random() }
-                  value={ c.id }
-                onSelect={ handleClickSaveEntry }
+          <fieldset>
+            <div className="post-form">
+              <div className="category-dropdown">
+                <label htmlFor="categories" className="centermebutton5">
+                  Choose a Category{" "}
+                </label>
+                <select
+                  value={category}
+                  className="centermebutton4"
+                  name="categories"
+                  onChange={handleDropdownChange}
                 >
-                  { c.name }
-                </option>
-              ))
-              }
-            </select>
+                  <option defaultValue={category}>
+                    Please Select a Category
+                  </option>
+                  {categoryList.map((c) => (
+                    <option
+                      htmlFor={c.name}
+                      key={c.id * Math.random()}
+                      value={c.id}
+                      onSelect={handleClickSaveEntry}
+                    >
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </fieldset>
+          <div>
+            <Button className="move1" onClick={handleSaveEvent}>
+              Save
+            </Button>
+            <Button
+              className="move2"
+              variant="warning"
+              onClick={handleCancelSave}
+            >
+              Cancel
+            </Button>
           </div>
-        </div>
-      </fieldset>
-
-            <Button className="article-btn"
-                onClick={handleSaveEvent}>
-                Save
-            </Button>
-            <Button className="article-btn"
-                variant="warning"
-                onClick={handleCancelSave}>
-                Cancel
-            </Button>
         </Container>
       </div>
     </>

@@ -4,7 +4,7 @@ import { deleteQuestion, GetAllQuestionsByFirebaseUserId } from "../../modules/q
 import { useHistory } from "react-router";
 import "firebase/auth";
 import firebase from "firebase/app";
-import "../Home.css";
+import "./MyQuestions.css";
 
 
 export const Question = ({  question, deletefunction}) => {
@@ -43,20 +43,20 @@ useEffect(() => {
   return (
    
 
-<Card>
-<CardBody className="centermyquestions">
+<Card className="qcelement1">
+<CardBody >
 
 
 
               <div  key={question.id * Math.random() + Math.random}>
-                {" "}
-                <div>{question?.questionContent}</div>{" "}
+               
+                <div >{question?.questionContent}</div>
               </div>
        
 
 {/* <label style={{width: "10em"}}>{category.name} </label> */}
-<button className="centermyquestionsE" onClick={()=> history.push(`/question/edit/${question.id}`)} style={{width: "5em",marginLeft:".5rem"}}>Edit</button>
-<button className="centermyquestionsD" onClick={()=>deletefunction(question.id)} style={{width: "5em",marginLeft:".5rem"}}>Delete</button>
+<button  onClick={()=> history.push(`/question/edit/${question.id}`)} style={{width: "5em",marginLeft:".5rem"}}>Edit</button>
+<button  onClick={()=>deletefunction(question.id)} style={{width: "5em",marginLeft:".5rem"}}>Delete</button>
    
 </CardBody>
 </Card>

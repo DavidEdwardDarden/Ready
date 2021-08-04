@@ -12,7 +12,7 @@ import { deleteQuestion} from "../../modules/quizManager";
 
 const MyQuestions = () => {
   const [questionList, setQuestionList] = useState([]);
-  const [ setIsLoading] = useState(false);
+  // const [ setIsLoading] = useState(false);
   const history = useHistory();
 
   //!  QUESTION ARRAY  ---------------------------------------
@@ -35,7 +35,7 @@ const MyQuestions = () => {
   //!  click ->  EXIT BUTTON ---------------------------------------
   const handleClickEvent = (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    // setIsLoading(true);
     history.push(`/`);
   };
 
@@ -61,13 +61,14 @@ const MyQuestions = () => {
   //!  WELCOME TO THE DOM!  ---------------------------------------
   return (
     <>
-      <div className="orange">
-        <img src={thing2} className="centermequizcrown" alt="user img2" />
-        <img src={thing} className="centermequiz" alt="user img" />
-        <img src={thing3} className="centerme7" alt="user img3" />
+      <div >
+        {/* <img src={thing2} className="myquestioncrown" alt="user img2" /> */}
+        <img src={thing} className="elephant" alt="user img" />
+        {/* <img src={thing3} className="honeycomb" alt="user img3" /> */}
+        {/* <img src={thing3} className="centerme7" alt="user img3" /> */}
 
-        <div className="centermeqanda"> YOUR QUESTIONS: </div>
-
+        {/* <div className="centermeqanda"> YOUR QUESTIONS: </div> */}
+<div className="toppadding">
         {questionList.map((question) => (
           <div>
             {/* <section key={question.id * Math.random() + Math.random}>
@@ -81,11 +82,11 @@ const MyQuestions = () => {
           </div>
         ))}
 
+</div>
 
-
-        <button onClick={handleClickEvent} className="centermeexitbuttonx">
+        {/* <button onClick={handleClickEvent} className="centermeexitbuttonx">
           Exit
-        </button>
+        </button> */}
       </div>
     </>
   );

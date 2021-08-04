@@ -111,7 +111,10 @@ const Home = () => {
 
   return (
     <>
-      <div className="orange">
+    
+      <div>
+        {/* <div>HELLOoooooooooooooooooooooooooooooooooooooo00000000000000000</div> */}
+      
         <img src={thing2} className="centerme3" alt="user img2" />
         <img src={thing} className="centerme" alt="user img" />
         <img src={thing3} className="centerme7" alt="user img3" />
@@ -126,7 +129,7 @@ const Home = () => {
         <img src={thing88} className="centermemore77" alt="user img3" />
         <img src={thing2} className="dollarsign1" alt="user img3" />
         <img src={thing2} className="dollarsign2" alt="user img3" />
-
+      
         <button onClick={handleClickEvent} className="centermebutton">
           Quiz Me
         </button>
@@ -161,6 +164,7 @@ const Home = () => {
           </div>
         </fieldset>
       </div>
+ 
     </>
   );
 };
